@@ -4,6 +4,7 @@
 echo "Installing jenkins-plugin-manager..."
 wget --quiet https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.13/jenkins-plugin-manager-2.12.13.jar
 
+ls 
 
 # Install plugins using jenkins-plugin-manager tool
 echo "Installing plugins..."
