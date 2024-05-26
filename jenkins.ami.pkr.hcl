@@ -46,7 +46,10 @@ build {
 
 
    provisioner "shell" {
-   
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "CHECKPOINT_DISABLE=1"
+    ]
     scripts = [
       "./scripts/jenkins-install.sh",
     ]
