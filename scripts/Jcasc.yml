@@ -2,7 +2,7 @@ jenkins:
   systemMessage: "Configured by Jenkins Configuration as Code"
   securityRealm:
     local:
-      allowsSignup: false
+      allowsSignup: true
       users:
         - id: "admin"
           password: "admin"
