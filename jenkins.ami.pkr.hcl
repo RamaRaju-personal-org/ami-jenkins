@@ -34,11 +34,9 @@ source "amazon-ebs" "ubuntu" {
      # Ensure EBS volume is deleted on termination
   launch_block_device_mappings {
     device_name = "/dev/sda1"
-    ebs {
-      delete_on_termination = true
-      volume_size           = 8
-      volume_type           = "gp2"
-    }
+    delete_on_termination = true
+    volume_size           = 8
+    volume_type           = "gp2"
   }
 }
 
