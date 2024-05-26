@@ -58,12 +58,16 @@ build {
     ]
     }
 
-#     provisioner "shell" {
-#     execute_command = "sudo {{.Path}}"
-#     scripts = [
-#       "./scripts/Jenkins-SetUp.sh",
-#     ]
-#   }
+    provisioner "shell" {
+    scripts = [
+      "./scripts/install-go.sh",
+     ]
+    }
+    provisioner "shell" {
+    scripts = [
+      "./scripts/Jenkins-AutoPlugin-SetUp.sh",
+     ]
+    }
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
 #     inline = [
