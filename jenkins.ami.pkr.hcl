@@ -65,10 +65,10 @@ build {
     }
 
     provisioner "file" {
-     source      = "./scripts/Jcasc.yml "
+     source      = "./scripts/Jcasc.yml"
      destination = "/var/lib/jenkins/Jcasc.yml"
    }
-   
+
     provisioner "shell" {
     scripts = [
       "./scripts/Jenkins-AutoPlugin-SetUp.sh",
