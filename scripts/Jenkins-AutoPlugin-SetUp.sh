@@ -58,15 +58,15 @@ echo "Plugins installed successfully."
 
 
 
-# Configure JAVA_OPTS to disable setup wizard
-sudo mkdir -p /etc/systemd/system/jenkins.service.d/
-{
-  echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jcasc.yaml\""
-} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+# # Configure JAVA_OPTS to disable setup wizard
+# sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+# {
+#   echo "[Service]"
+#   echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jcasc.yaml\""
+# } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
-echo "Restarting Jenkins service with JCasC..."
-sudo systemctl daemon-reload
-sudo systemctl stop jenkins
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
+# echo "Restarting Jenkins service with JCasC..."
+# sudo systemctl daemon-reload
+# sudo systemctl stop jenkins
+# sudo systemctl start jenkins
+# sudo systemctl enable jenkins
