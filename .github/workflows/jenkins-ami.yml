@@ -29,6 +29,11 @@ jobs:
 
       - name: Validate Packer template
         run: packer validate .
+      
+      - name: List files in the /tmp directory
+        run: |
+            ls -lah /tmp
+
 
       - name: Build AMI
         env:

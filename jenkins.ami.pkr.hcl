@@ -68,6 +68,9 @@ build {
       "./scripts/Jenkins-AutoPlugin-SetUp.sh",
      ]
     }
+
+    
+    
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
 #     inline = [
