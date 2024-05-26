@@ -67,10 +67,10 @@ build {
       "/tmp/configure-caddy.sh"
     ]
   }
- # only the team members can access the ami
-  post-processor "shell-local" {
-    inline = [
-      "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
-    ]
-  }
+#  # only the team members can access the ami
+#   post-processor "shell-local" {
+#     inline = [
+#       "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
+#     ]
+#   }
 }
