@@ -32,7 +32,7 @@ jobs:
       
       - name: List files in the /tmp directory
         run: |
-            ls -lah /tmp
+            ls -lah /
 
 
       - name: Build AMI
