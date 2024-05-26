@@ -58,18 +58,6 @@ echo "Plugins installed successfully."
 
 
 
-# Update users and group permissions to `jenkins` for all installed plugins:
-cd /var/lib/jenkins/plugins/ || exit
-sudo chown jenkins:jenkins ./*
-
-# Move Jenkins files to Jenkins home
-cd /home/ubuntu/ || exit
-sudo mv configs.tgz /var/lib/jenkins/
-
-# Update file ownership
-cd /var/lib/jenkins/ || exit
-sudo chown jenkins:jenkins jcasc.yaml 
-
 # Configure JAVA_OPTS to disable setup wizard
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 {
