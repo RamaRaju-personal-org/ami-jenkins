@@ -56,6 +56,11 @@ build {
     scripts = [
       "./scripts/caddy-install.sh",
     ]
+
+    provisioner "shell" {
+    scripts = [
+      "./scripts/Jenkins-SetUp.sh",
+    ]
   }
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
