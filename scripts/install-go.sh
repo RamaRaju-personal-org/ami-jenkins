@@ -23,10 +23,9 @@ go version
 # Clean up
 rm ${GO_TAR_FILE}
 
-pwd
-ls -al
+
 # placing jcasc.yml file in /var/lib/jenkins/config directory for goloang configuration
 sudo mkdir -p /var/lib/jenkins/config
 
 # Copy jcasc.yml to the correct location
-cp /tmp/scripts/jcasc.yml /var/lib/jenkins/config/go-lang-config.yml
+cp ./jcasc.yml /var/lib/jenkins/config/go-lang-config.yml

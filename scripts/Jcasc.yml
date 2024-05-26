@@ -1,0 +1,23 @@
+jenkins:
+  systemMessage: "Configured by Jenkins Configuration as Code"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: true
+  tools:
+    go:
+      installations:
+        - name: "Go"
+          home: "/usr/local/go"
+  plugins:
+    required:
+      - job-dsl
+      - configuration-as-code
+      - git
+      - workflow-aggregator
+      - go
