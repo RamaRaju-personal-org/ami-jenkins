@@ -28,8 +28,7 @@ source "amazon-ebs" "ubuntu" {
   region        = var.aws_region
   source_ami    = "ami-04b70fa74e45c3917"
   ssh_username  = "ubuntu"
-  ssh_interface        = "session_manager"
-  communicator         = "ssh"
+  communicator  = "ssh"
 
   # Ensure EBS volume is deleted on termination
      # Ensure EBS volume is deleted on termination
