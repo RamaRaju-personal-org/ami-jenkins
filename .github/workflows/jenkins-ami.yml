@@ -30,10 +30,6 @@ jobs:
       - name: Validate Packer template
         run: packer validate .
       
-      - name: List files in the /tmp directory
-        run: |
-            ls -lah /home/runner
-
 
       - name: Build AMI
         env:
