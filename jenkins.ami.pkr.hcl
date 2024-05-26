@@ -30,7 +30,6 @@ source "amazon-ebs" "ubuntu" {
   ssh_username  = "ubuntu"
   ssh_interface        = "session_manager"
   communicator         = "ssh"
-  iam_instance_profile = "myinstanceprofile"
 
   # Ensure EBS volume is deleted on termination
      # Ensure EBS volume is deleted on termination
