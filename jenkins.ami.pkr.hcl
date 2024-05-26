@@ -59,6 +59,7 @@ build {
     }
 
     provisioner "shell" {
+    execute_command = "sudo {{.Path}}"
     scripts = [
       "./scripts/Jenkins-SetUp.sh",
     ]
