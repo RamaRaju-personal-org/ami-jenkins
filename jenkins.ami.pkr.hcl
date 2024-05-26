@@ -56,6 +56,7 @@ build {
     scripts = [
       "./scripts/caddy-install.sh",
     ]
+    }
 
     provisioner "shell" {
     scripts = [
