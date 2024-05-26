@@ -46,12 +46,9 @@ build {
 
 
    provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive",
-      "CHECKPOINT_DISABLE=1"
-    ]
+   
     scripts = [
-      "./scripts/install.sh",
+      "./scripts/jenkins-install.sh",
     ]
   }
 #  # only the team members can access the ami
