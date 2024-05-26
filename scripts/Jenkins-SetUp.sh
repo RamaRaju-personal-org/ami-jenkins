@@ -31,8 +31,7 @@ echo "Jenkins is up and running."
 
 # Install jenkins-plugin-manager
 echo "Installing jenkins-plugin-manager..."
-curl -Lo /usr/local/bin/jenkins-plugin-manager https://github.com/jenkinsci/plugin-installation-manager-tool/releases/latest/download/jenkins-plugin-manager-1.0.0.jar
-chmod +x /usr/local/bin/jenkins-plugin-manager
+wget --quiet https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.13/jenkins-plugin-manager-2.12.13.jar
 
 # Define plugins to be installed
 PLUGINS=(
@@ -81,13 +80,20 @@ for plugin in "${PLUGINS[@]}"; do
   echo "$plugin" >> plugins.txt
 done
 
-# Install plugins
+# Install plugins using jenkins-plugin-manager tool
 echo "Installing plugins..."
-jenkins-plugin-manager --plugin-file plugins.txt --war /usr/share/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --verbose
+sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkins.war \
+  --plugin-download-directory /var/lib/jenkins/plugins --plugin-file plugins.txt
 
-# Update permissions for installed plugins
+# Update users and group permissions to `jenkins` for all installed plugins
 echo "Updating permissions for installed plugins..."
-chown -R jenkins:jenkins "$JENKINS_PLUGINS_DIR"
+cd /var/lib/jenkins/plugins/ || exit
+sudo chown jenkins:jenkins ./*
+
+# Move Jenkins files to Jenkins home
+echo "Moving Jenkins files to Jenkins home..."
+sudo mv /tmp/jenkins_home/* "$JENKINS_HOME/"
+sudo chown -R jenkins:jenkins "$JENKINS_HOME/"
 
 # Configure JAVA_OPTS to disable setup wizard
 echo "Configuring JAVA_OPTS to disable setup wizard..."
@@ -101,4 +107,4 @@ fi
 echo "Restarting Jenkins..."
 systemctl restart jenkins
 
-echo "Jenkins setup is complete with recommended plugins installed and setup wizard disabled."
+echo "Jenkins setup is complete with recommended plugins installed, permissions updated, and setup wizard disabled."
