@@ -69,7 +69,18 @@ build {
      ]
     }
 
-    
+      # Shell provisioner to create directory
+    provisioner "shell" {
+     inline = [
+      "sudo mkdir -p /var/lib/jenkins/configs"
+     ]
+   }
+
+  # File provisioner to copy jcasc.yml
+   provisioner "file" {
+    source      = "./scripts/jcasc.yml"
+    destination = "/var/lib/jenkins/configs/go-config.yml"
+   }
     
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
