@@ -55,3 +55,30 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
   --plugin-download-directory /var/lib/jenkins/plugins --plugin-file /tmp/plugins.txt
 
 echo "Plugins installed successfully."
+
+
+
+# Update users and group permissions to `jenkins` for all installed plugins:
+cd /var/lib/jenkins/plugins/ || exit
+sudo chown jenkins:jenkins ./*
+
+# Move Jenkins files to Jenkins home
+cd /home/ubuntu/ || exit
+sudo mv configs.tgz /var/lib/jenkins/
+
+# Update file ownership
+cd /var/lib/jenkins/ || exit
+sudo tar -xzvf configs.tgz
+sudo chown jenkins:jenkins jcasc.yaml 
+
+# Configure JAVA_OPTS to disable setup wizard
+sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+{
+  echo "[Service]"
+  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jcasc.yaml\""
+} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+
+echo "Restarting Jenkins service with JCasC..."
+sudo systemctl daemon-reload
+sudo systemctl stop jenkins
+sudo systemctl start jenkins
