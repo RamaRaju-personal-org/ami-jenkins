@@ -31,13 +31,17 @@ source "amazon-ebs" "ubuntu" {
   associate_public_ip_address = false
 
   # Ensure EBS volume is deleted on termination
-  block_device_mappings {
+     # Ensure EBS volume is deleted on termination
+  launch_block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
       delete_on_termination = true
+      volume_size           = 8
+      volume_type           = "gp2"
     }
   }
 }
+
 
 build {
   sources = ["source.amazon-ebs.ubuntu"]
