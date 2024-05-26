@@ -16,3 +16,16 @@ sudo apt-get update && sudo apt-get install caddy -y
 # Enable Caddy service
 sudo systemctl enable caddy
 
+
+# Remove default Caddyfile
+sudo rm /etc/caddy/Caddyfile
+
+# Create new Caddyfile for Jenkins
+sudo tee /etc/caddy/Caddyfile <<EOF
+jenkins.ramaraju.cloud {
+  reverse_proxy http://127.0.0.1:8080
+}
+EOF
+
+# Restart Caddy service to apply new configuration
+sudo systemctl restart caddy
