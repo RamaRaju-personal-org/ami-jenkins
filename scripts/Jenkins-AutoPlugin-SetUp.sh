@@ -37,7 +37,9 @@ semantic-versioning-plugin:latest
 ssh-slaves:latest
 timestamper:latest
 workflow-aggregator:latest
-ws-cleanup:latest"
+ws-cleanup:latest
+go:latest
+"
 
 # Write the list of plugins to plugins.txt
 echo "Writing the list of plugins to plugins.txt..."
