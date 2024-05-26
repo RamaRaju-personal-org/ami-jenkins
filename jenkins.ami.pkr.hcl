@@ -44,29 +44,14 @@ source "amazon-ebs" "ubuntu" {
 build {
   sources = ["source.amazon-ebs.ubuntu"]
 
-  provisioner "file" {
-    source      = "scripts/install-jenkins.sh"
-    destination = "/tmp/install-jenkins.sh"
-  }
 
-  provisioner "file" {
-    source      = "scripts/install-caddy.sh"
-    destination = "/tmp/install-caddy.sh"
-  }
-
-  provisioner "file" {
-    source      = "scripts/configure-caddy.sh"
-    destination = "/tmp/configure-caddy.sh"
-  }
-
-  provisioner "shell" {
-    inline = [
-      "chmod +x /tmp/install-jenkins.sh",
-      "chmod +x /tmp/install-caddy.sh",
-      "chmod +x /tmp/configure-caddy.sh",
-      "/tmp/install-jenkins.sh",
-      "/tmp/install-caddy.sh",
-      "/tmp/configure-caddy.sh"
+   provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "CHECKPOINT_DISABLE=1"
+    ]
+    scripts = [
+      "./scripts/install.sh",
     ]
   }
 #  # only the team members can access the ami
