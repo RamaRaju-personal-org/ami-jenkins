@@ -3,11 +3,20 @@
 # Jenkins server details
 JENKINS_URL="http://localhost:8080"
 ADMIN_USER="admin"
-ADMIN_PASSWORD=$(cat /var/lib/jenkins/secrets/initialAdminPassword)
 
 # Check if the script is run as root or using sudo
 if [ "$(id -u)" -ne 0 ]; then
   echo "Please run this script as root or using sudo."
+  exit 1
+fi
+
+# Read Jenkins initial admin password
+JENKINS_PASSWORD_FILE="/var/lib/jenkins/secrets/initialAdminPassword"
+
+if [ -f "$JENKINS_PASSWORD_FILE" ]; then
+  ADMIN_PASSWORD=$(sudo cat "$JENKINS_PASSWORD_FILE")
+else
+  echo "Jenkins initial admin password file not found at $JENKINS_PASSWORD_FILE"
   exit 1
 fi
 
