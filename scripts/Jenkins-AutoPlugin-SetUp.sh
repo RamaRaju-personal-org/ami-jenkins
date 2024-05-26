@@ -68,7 +68,6 @@ sudo mv configs.tgz /var/lib/jenkins/
 
 # Update file ownership
 cd /var/lib/jenkins/ || exit
-sudo tar -xzvf configs.tgz
 sudo chown jenkins:jenkins jcasc.yaml 
 
 # Configure JAVA_OPTS to disable setup wizard

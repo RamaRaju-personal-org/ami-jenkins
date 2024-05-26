@@ -63,11 +63,18 @@ build {
       "./scripts/install-go.sh",
      ]
     }
+
+    provisioner "file" {
+     source      = "./scripts/Jcasc.yml "
+     destination = "/var/lib/jenkins/Jcasc.yml"
+   }
+   
     provisioner "shell" {
     scripts = [
       "./scripts/Jenkins-AutoPlugin-SetUp.sh",
      ]
     }
+   
 
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
