@@ -58,12 +58,7 @@ build {
     ]
     }
 
-    provisioner "shell" {
-    execute_command = "sudo {{.Path}}"
-    scripts = [
-      "./scripts/Jenkins-SetUp.sh",
-    ]
-  }
+
 #  # only the team members can access the ami
 #   post-processor "shell-local" {
 #     inline = [
