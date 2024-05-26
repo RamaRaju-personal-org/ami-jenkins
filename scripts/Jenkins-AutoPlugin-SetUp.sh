@@ -56,6 +56,10 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
 
 echo "Plugins installed successfully."
 
+sudo mkdir -p /var/lib/jenkins
+sudo mv /tmp/Jcasc.yml /var/lib/jenkins/Jcasc.yml
+sudo chown jenkins:jenkins /var/lib/jenkins/Jcasc.yml
+sudo systemctl restart jenkins
 
 
 # Configure JAVA_OPTS to disable setup wizard
@@ -69,3 +73,4 @@ echo "Restarting Jenkins service with JCasC..."
 sudo systemctl daemon-reload
 sudo systemctl stop jenkins
 sudo systemctl start jenkins
+sudo systemctl enable jenkins
