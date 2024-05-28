@@ -71,8 +71,13 @@ build {
    }
 
     provisioner "file" {
-     source      = "./jenkins/plugins.txt"
-     destination = "/home/ubuntu/plugins.txt"
+     source      = "./jenkins/Jcasc.yml"
+     destination = "/home/ubuntu/Jcasc.yml"
+   }
+
+    provisioner "file" {
+     source      = "./jenkins/jenkins-UserSetUp.groovy"
+     destination = "/var/lib/jenkins/jenkins-UserSetUp.groovy"
    }
 
 
@@ -82,6 +87,12 @@ build {
      ]
     }
    
+    provisioner "shell" {
+    inline = [
+      "echo 'Running Groovy script to create user...'",
+      "java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy"
+    ]
+  }
 
 #  # only the team members can access the ami
 #   post-processor "shell-local" {

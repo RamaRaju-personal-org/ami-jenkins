@@ -61,7 +61,7 @@ sudo mv /home/ubuntu jcasc.yml  /var/lib/jenkins/jcasc.yml
 
 # Update file ownership
 cd /var/lib/jenkins/ || exit
-sudo chown jenkins:jenkins jcasc.yml 
+sudo chown jenkins:jenkins jcasc.yml ./*.groovy
 
 # Configure JAVA_OPTS to disable setup wizard
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
@@ -81,27 +81,3 @@ sudo systemctl enable jenkins
 echo "Downloading Jenkins CLI..."
 cd /home/ubuntu
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-
-# Run the Groovy script to create a user
-echo "Running Groovy script to create user..."
-cd /home/ubuntu
-cat <<EOF | sudo java -jar jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy =
-#!groovy
-
-import jenkins.model.*
-import hudson.security.*
-
-def instance = Jenkins.getInstance()
-
-println "--> creating local user 'admin'"
-
-def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-hudsonRealm.createAccount('ram','csye7125')
-instance.setSecurityRealm(hudsonRealm)
-
-def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
-instance.setAuthorizationStrategy(strategy)
-instance.save()
-EOF
-
-echo "Groovy script executed successfully."
