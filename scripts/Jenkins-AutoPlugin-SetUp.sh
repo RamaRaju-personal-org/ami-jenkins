@@ -68,7 +68,7 @@ sudo chown jenkins:jenkins ./Jcasc.yml ./*.groovy ./plugins.txt
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 {
   echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jcasc.yml\""
+  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
 } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
 echo "Restarting Jenkins service with Jenkins configration as code"
