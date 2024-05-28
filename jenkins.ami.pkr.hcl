@@ -62,19 +62,19 @@ build {
 
   # Copy the Jcasc.yml file to a /home/ubuntu location
   provisioner "file" {
-    source      = "./jenkins/jcasc.yml"
+    source      = "jenkins/jcasc.yml"
     destination = "/home/ubuntu/jcasc.yml"
   }
 
   # Copy the plugins.txt file to a /home/ubuntu location
   provisioner "file" {
-    source      = "./jenkins/plugins.txt"
+    source      = "jenkins/plugins.txt"
     destination = "/home/ubuntu/plugins.txt"
   }
 
   # Copy the Groovy script to the /home/ubuntu location
   provisioner "file" {
-    source      = "./jenkins/jenkins-UserSetUp.groovy"
+    source      = "jenkins/jenkins-UserSetUp.groovy"
     destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
   }
 
