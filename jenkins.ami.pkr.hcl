@@ -66,8 +66,8 @@ build {
 
    # Copy the Jcasc.yml file to a /home/ubuntu location
     provisioner "file" {
-     source      = "./jenkins/Jcasc.yml"
-     destination = "/home/ubuntu/Jcasc.yml"
+     source      = "./jenkins/jcasc.yml"
+     destination = "/home/ubuntu/jcasc.yml"
    }
 
     provisioner "file" {
@@ -91,7 +91,7 @@ build {
     inline = [
       
       "echo 'Running Groovy script to create user...'",
-      "java -jar /tmp/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/init.groovy.d/jenkins-UserSetUp.groovy"
+      "java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy"
     ]
   }
 

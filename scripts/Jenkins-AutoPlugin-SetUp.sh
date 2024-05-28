@@ -58,12 +58,11 @@ echo "Plugins installed successfully."
 
 #moving go jcasc.yml file from /home/ubuntu/ to /var/lib/jenkins
 sudo mv /home/ubuntu/jcasc.yml  /var/lib/jenkins/jcasc.yml
-sudo mkdir -p /var/lib/jenkins/init.groovy.d
 sudo mv /home/ubuntu/plugins.txt /var/lib/jenkins/plugins.txt
 sudo mv /home/ubuntu/jenkins-UserSetUp.groovy /var/lib/jenkins/jenkins-UserSetUp.groovy
 # Update file ownership
 cd /var/lib/jenkins/ || exit
-sudo chown jenkins:jenkins jcasc.yml ./*.groovy plugins.txt
+sudo chown jenkins:jenkins ./jcasc.yml ./*.groovy ./plugins.txt
 
 # Configure JAVA_OPTS to disable setup wizard
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
