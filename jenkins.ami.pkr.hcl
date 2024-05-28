@@ -44,51 +44,26 @@ build {
 
   # Copy necessary files first
   provisioner "file" {
-    source      = "./jenkins/Jcasc.yml"
-    destination = "/home/ubuntu/Jcasc.yml"
+    source      = "./jenkins/jcasc.yml"
+    destination = "/home/ubuntu/jcasc.yml"
   }
-
-  # provisioner "file" {
-  #   source      = "./jenkins/plugins.txt"
-  #   destination = "/home/ubuntu/plugins.txt"
-  # }
 
   provisioner "file" {
-    source      = "./jenkins/jenkins-UserSetUp.groovy"
-    destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
+    source      = "./jenkins/plugins.txt"
+    destination = "/home/ubuntu/plugins.txt"
   }
 
-  # Shell provisioners
+  provisioner "file" {
+    source      = "./jenkins/jenkins-setup.groovy"
+    destination = "/home/ubuntu/jenkins-setup.groovy"
+  }
+
   provisioner "shell" {
     scripts = [
       "./scripts/jenkins-install.sh",
-    ]
-  }
-
-  provisioner "shell" {
-    scripts = [
       "./scripts/caddy-install.sh",
-    ]
-  }
-
-  provisioner "shell" {
-    scripts = [
       "./scripts/install-go.sh",
+      "./scripts/jenkins-AutoPlugin-Setup.sh"
     ]
   }
-
-  provisioner "shell" {
-    scripts = [
-      "./scripts/Jenkins-AutoPlugin-SetUp.sh",
-    ]
-  }
-
- 
-
-  # Uncomment this section if you want to restrict AMI access to team members
-  # post-processor "shell-local" {
-  #   inline = [
-  #     "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
-  #   ]
-  # }
-   }
+}

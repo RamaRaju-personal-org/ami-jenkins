@@ -4,8 +4,8 @@ jenkins:
     local:
       allowsSignup: true
       users:
-        - id: "ram"
-          password: "ram"
+        - id: "admin"
+          password: "admin"
   authorizationStrategy:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: true
