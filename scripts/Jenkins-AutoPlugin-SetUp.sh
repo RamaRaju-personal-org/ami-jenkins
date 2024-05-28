@@ -78,17 +78,17 @@ wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar -P /home/ubuntu/
 echo "groovy user setup"
 sudo java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s jenkins.ramaraju.cloud groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
 
-sudo systemctl restart jenkins
-sleep 5 
+# sudo systemctl restart jenkins
+# sleep 5 
 
-# Configure JAVA_OPTS to disable setup wizard
-sudo mkdir -p /etc/systemd/system/jenkins.service.d/
-{
-  echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
-} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+# # Configure JAVA_OPTS to disable setup wizard
+# sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+# {
+#   echo "[Service]"
+#   echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
+# } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
-echo "Restarting Jenkins service with Jenkins configration as code"
+# echo "Restarting Jenkins service with Jenkins configration as code"
 sudo systemctl daemon-reload
 sudo systemctl stop jenkins
 sudo systemctl start jenkins
