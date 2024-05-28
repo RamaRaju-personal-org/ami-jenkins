@@ -67,23 +67,31 @@ echo "ownership update"
 cd /var/lib/jenkins/ || exit
 sudo chown jenkins:jenkins ./Jcasc.yml ./*.groovy ./plugins.txt
 
-# Download Jenkins CLI
-echo "Downloading Jenkins CLI..."
-cd /home/ubuntu
-wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+echo '[Service]' | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+echo 'Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jcasc.yml\"' | sudo tee -a /etc/systemd/system/jenkins.service.d/override.conf
+sudo systemctl daemon-reload
+sudo systemctl restart jenkins
+sleep 60  # Wait for Jenkins to apply the JCasC configuration
+wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar -P /home/ubuntu/
 
-echo "Waiting a bit more to ensure Jenkins is ready..."
-sleep 30
+# Download Jenkins CLI
+# echo "Downloading Jenkins CLI..."
+# cd /home/ubuntu
+# wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+
+# echo "Waiting a bit more to ensure Jenkins is ready..."
+# sleep 30
 
 echo "groovy user setup"
 sudo java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
 
-# Configure JAVA_OPTS to disable setup wizard
-sudo mkdir -p /etc/systemd/system/jenkins.service.d/
-{
-  echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
-} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+# # Configure JAVA_OPTS to disable setup wizard
+# sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+# {
+#   echo "[Service]"
+#   echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
+# } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
 echo "Restarting Jenkins service with Jenkins configration as code"
 sudo systemctl daemon-reload
