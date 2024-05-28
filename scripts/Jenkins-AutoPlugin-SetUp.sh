@@ -76,7 +76,7 @@ wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar -P /home/ubuntu/
 
 
 echo "groovy user setup"
-sudo java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
+sudo java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s jenkins.ramaraju.cloud groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
 
 sudo systemctl restart jenkins
 sleep 5 
