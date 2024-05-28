@@ -80,6 +80,7 @@ sudo systemctl stop jenkins
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
 
+sleep 10
 
 # Download Jenkins CLI
 echo "Downloading Jenkins CLI..."
