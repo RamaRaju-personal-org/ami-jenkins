@@ -31,7 +31,6 @@ source "amazon-ebs" "ubuntu" {
   communicator  = "ssh"
 
   # Ensure EBS volume is deleted on termination
-  # Ensure EBS volume is deleted on termination
   launch_block_device_mappings {
     device_name           = "/dev/sda1"
     delete_on_termination = true
@@ -40,13 +39,10 @@ source "amazon-ebs" "ubuntu" {
   }
 }
 
-
 build {
   sources = ["source.amazon-ebs.ubuntu"]
 
-
   provisioner "shell" {
-
     scripts = [
       "./scripts/jenkins-install.sh",
     ]
@@ -70,16 +66,17 @@ build {
     destination = "/home/ubuntu/jcasc.yml"
   }
 
+  # Copy the plugins.txt file to a /home/ubuntu location
   provisioner "file" {
     source      = "./jenkins/plugins.txt"
     destination = "/home/ubuntu/plugins.txt"
   }
 
+  # Copy the Groovy script to the /home/ubuntu location
   provisioner "file" {
     source      = "./jenkins/jenkins-UserSetUp.groovy"
     destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
   }
-
 
   provisioner "shell" {
     scripts = [
@@ -89,16 +86,14 @@ build {
 
   provisioner "shell" {
     inline = [
-
-      "echo 'Running Groovy script to create user...'",
-      "java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy"
+      "java -jar /tmp/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /home/ubuntu/jenkins-UserSetUp.groovy"
     ]
   }
 
-  #  # only the team members can access the ami
-  #   post-processor "shell-local" {
-  #     inline = [
-  #       "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
-  #     ]
-  #   }
+  # Uncomment this section if you want to restrict AMI access to team members
+  # post-processor "shell-local" {
+  #   inline = [
+  #     "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
+  #   ]
+  # }
 }
