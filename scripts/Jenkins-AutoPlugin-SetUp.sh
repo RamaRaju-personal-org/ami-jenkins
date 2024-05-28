@@ -79,10 +79,12 @@ sudo systemctl enable jenkins
 
 # Download Jenkins CLI
 echo "Downloading Jenkins CLI..."
+cd /home/ubuntu
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 
 # Run the Groovy script to create a user
 echo "Running Groovy script to create user..."
+cd /home/ubuntu
 cat <<EOF | sudo java -jar jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy =
 #!groovy
 
