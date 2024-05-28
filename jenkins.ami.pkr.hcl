@@ -48,10 +48,10 @@ build {
     destination = "/home/ubuntu/Jcasc.yml"
   }
 
-  provisioner "file" {
-    source      = "./jenkins/plugins.txt"
-    destination = "/home/ubuntu/plugins.txt"
-  }
+  # provisioner "file" {
+  #   source      = "./jenkins/plugins.txt"
+  #   destination = "/home/ubuntu/plugins.txt"
+  # }
 
   provisioner "file" {
     source      = "./jenkins/jenkins-UserSetUp.groovy"
