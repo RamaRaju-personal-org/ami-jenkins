@@ -1,5 +1,5 @@
 jenkins:
-  systemMessage: "Configured by Jenkins Configuration as Code"
+  systemMessage: "Configured by Jenkins Configuration as Code for golang"
   securityRealm:
     local:
       allowsSignup: true
