@@ -83,7 +83,7 @@ build {
     ]
   }
 
-  }
+ 
 
   # Uncomment this section if you want to restrict AMI access to team members
   # post-processor "shell-local" {
@@ -91,4 +91,4 @@ build {
   #     "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
   #   ]
   # }
-}
+   }
