@@ -19,7 +19,7 @@ variable "ami_name" {
 
 variable "team_account_ids" {
   type    = list(string)
-  default = ["058264431172"]  # Replace with your team's AWS account IDs
+  default = ["058264431172"] # Replace with your team's AWS account IDs
 }
 
 source "amazon-ebs" "ubuntu" {
@@ -31,9 +31,9 @@ source "amazon-ebs" "ubuntu" {
   communicator  = "ssh"
 
   # Ensure EBS volume is deleted on termination
-     # Ensure EBS volume is deleted on termination
+  # Ensure EBS volume is deleted on termination
   launch_block_device_mappings {
-    device_name = "/dev/sda1"
+    device_name           = "/dev/sda1"
     delete_on_termination = true
     volume_size           = 8
     volume_type           = "gp2"
@@ -45,60 +45,60 @@ build {
   sources = ["source.amazon-ebs.ubuntu"]
 
 
-   provisioner "shell" {
-    
+  provisioner "shell" {
+
     scripts = [
       "./scripts/jenkins-install.sh",
     ]
-   }
+  }
 
-    provisioner "shell" {
+  provisioner "shell" {
     scripts = [
       "./scripts/caddy-install.sh",
     ]
-    }
+  }
 
-    provisioner "shell" {
+  provisioner "shell" {
     scripts = [
       "./scripts/install-go.sh",
-     ]
-    }
+    ]
+  }
 
-   # Copy the Jcasc.yml file to a /home/ubuntu location
-    provisioner "file" {
-     source      = "./jenkins/jcasc.yml"
-     destination = "/home/ubuntu/jcasc.yml"
-   }
+  # Copy the Jcasc.yml file to a /home/ubuntu location
+  provisioner "file" {
+    source      = "./jenkins/jcasc.yml"
+    destination = "/home/ubuntu/jcasc.yml"
+  }
 
-    provisioner "file" {
-     source      = "./jenkins/plugins.txt"
-     destination = "/home/ubuntu/plugins.txt"
-   }
+  provisioner "file" {
+    source      = "./jenkins/plugins.txt"
+    destination = "/home/ubuntu/plugins.txt"
+  }
 
-    provisioner "file" {
-     source      = "./jenkins/jenkins-UserSetUp.groovy"
-     destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
-   }
+  provisioner "file" {
+    source      = "./jenkins/jenkins-UserSetUp.groovy"
+    destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
+  }
 
 
-    provisioner "shell" {
-     scripts = [
+  provisioner "shell" {
+    scripts = [
       "./scripts/Jenkins-AutoPlugin-SetUp.sh",
-     ]
-    }
-   
-   provisioner "shell" {
+    ]
+  }
+
+  provisioner "shell" {
     inline = [
-      
+
       "echo 'Running Groovy script to create user...'",
       "java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy"
     ]
   }
 
-#  # only the team members can access the ami
-#   post-processor "shell-local" {
-#     inline = [
-#       "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
-#     ]
-#   }
+  #  # only the team members can access the ami
+  #   post-processor "shell-local" {
+  #     inline = [
+  #       "aws ec2 modify-image-attribute --image-id {{ .BuildAmiID }} --launch-permission 'Add={AccountId=${join(\",\", var.team_account_ids)}}' --region ${var.aws_region}"
+  #     ]
+  #   }
 }
