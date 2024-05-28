@@ -64,21 +64,17 @@ build {
      ]
     }
 
-#    # Copy the Jcasc.yml file to a temporary location
-#     provisioner "file" {
-#      source      = "./scripts/Jcasc.yml"
-#      destination = "/tmp/Jcasc.yml"
-#    }
+   # Copy the Jcasc.yml file to a /home/ubuntu location
+    provisioner "file" {
+     source      = "./jenkins/Jcasc.yml"
+     destination = "/home/ubuntu/Jcasc.yml"
+   }
 
-#   # Move the Jcasc.yml file to the desired location with the correct permissions
-#     provisioner "shell" {
-#      inline = [
-#       "sudo mkdir -p /var/lib/jenkins",
-#       "sudo mv /tmp/Jcasc.yml /var/lib/jenkins/Jcasc.yml",
-#       "sudo chown jenkins:jenkins /var/lib/jenkins/Jcasc.yml",
-#       "sudo systemctl restart jenkins"
-#      ]
-#    }
+    provisioner "file" {
+     source      = "./jenkins/plugins.txt"
+     destination = "/home/ubuntu/plugins.txt"
+   }
+
 
     provisioner "shell" {
      scripts = [
