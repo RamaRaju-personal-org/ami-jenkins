@@ -91,4 +91,4 @@ echo "Waiting a bit more to ensure Jenkins is ready..."
 sleep 30
 
 echo "groovy user setup"
-java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
+sudo java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
