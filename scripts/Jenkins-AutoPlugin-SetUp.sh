@@ -83,7 +83,7 @@ wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 
 # Run the Groovy script to create a user
 echo "Running Groovy script to create user..."
-cat <<EOF | java -jar jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy =
+cat <<EOF | sudo java -jar jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy =
 #!groovy
 
 import jenkins.model.*
