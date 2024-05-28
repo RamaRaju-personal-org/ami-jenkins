@@ -80,11 +80,15 @@ sudo systemctl stop jenkins
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
 
-sleep 10
+sleep 60  
 
 # Download Jenkins CLI
 echo "Downloading Jenkins CLI..."
 cd /home/ubuntu
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+
+echo "Waiting a bit more to ensure Jenkins is ready..."
+sleep 30
+
 echo "groovy user setup"
 java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
