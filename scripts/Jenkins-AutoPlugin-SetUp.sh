@@ -67,6 +67,17 @@ echo "ownership update"
 cd /var/lib/jenkins/ || exit
 sudo chown jenkins:jenkins ./Jcasc.yml ./*.groovy ./plugins.txt
 
+# Download Jenkins CLI
+echo "Downloading Jenkins CLI..."
+cd /home/ubuntu
+wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+
+echo "Waiting a bit more to ensure Jenkins is ready..."
+sleep 30
+
+echo "groovy user setup"
+sudo java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
+
 # Configure JAVA_OPTS to disable setup wizard
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 {
@@ -79,16 +90,3 @@ sudo systemctl daemon-reload
 sudo systemctl stop jenkins
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
-
-sleep 60  
-
-# Download Jenkins CLI
-echo "Downloading Jenkins CLI..."
-cd /home/ubuntu
-wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-
-echo "Waiting a bit more to ensure Jenkins is ready..."
-sleep 30
-
-echo "groovy user setup"
-sudo java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
