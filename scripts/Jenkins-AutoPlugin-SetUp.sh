@@ -57,7 +57,7 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
 echo "Plugins installed successfully."
 
 #moving go jcasc.yml file from /home/ubuntu/ to /var/lib/jenkins
-sudo mv /home/ubuntu/jcasc.yml  /var/lib/jenkins/jcasc.yml
+sudo mv /home/ubuntu/Jcasc.yml  /var/lib/jenkins/Jcasc.yml
 sudo mv /home/ubuntu/plugins.txt /var/lib/jenkins/plugins.txt
 sudo mv /home/ubuntu/jenkins-UserSetUp.groovy /var/lib/jenkins/jenkins-UserSetUp.groovy
 # Update file ownership
