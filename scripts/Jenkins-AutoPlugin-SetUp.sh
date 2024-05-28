@@ -82,3 +82,4 @@ sudo systemctl enable jenkins
 echo "Downloading Jenkins CLI..."
 cd /home/ubuntu
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy

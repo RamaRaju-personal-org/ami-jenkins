@@ -42,6 +42,23 @@ source "amazon-ebs" "ubuntu" {
 build {
   sources = ["source.amazon-ebs.ubuntu"]
 
+  # Copy necessary files first
+  provisioner "file" {
+    source      = "./jenkins/jcasc.yml"
+    destination = "/home/ubuntu/jcasc.yml"
+  }
+
+  provisioner "file" {
+    source      = "./jenkins/plugins.txt"
+    destination = "/home/ubuntu/plugins.txt"
+  }
+
+  provisioner "file" {
+    source      = "./jenkins/jenkins-UserSetUp.groovy"
+    destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
+  }
+
+  # Shell provisioners
   provisioner "shell" {
     scripts = [
       "./scripts/jenkins-install.sh",
@@ -60,34 +77,12 @@ build {
     ]
   }
 
-  # Copy the Jcasc.yml file to a /home/ubuntu location
-  provisioner "file" {
-    source      = "jenkins/jcasc.yml"
-    destination = "/home/ubuntu/jcasc.yml"
-  }
-
-  # Copy the plugins.txt file to a /home/ubuntu location
-  provisioner "file" {
-    source      = "jenkins/plugins.txt"
-    destination = "/home/ubuntu/plugins.txt"
-  }
-
-  # Copy the Groovy script to the /home/ubuntu location
-  provisioner "file" {
-    source      = "jenkins/jenkins-UserSetUp.groovy"
-    destination = "/home/ubuntu/jenkins-UserSetUp.groovy"
-  }
-
   provisioner "shell" {
     scripts = [
       "./scripts/Jenkins-AutoPlugin-SetUp.sh",
     ]
   }
 
-  provisioner "shell" {
-    inline = [
-      "java -jar /tmp/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /home/ubuntu/jenkins-UserSetUp.groovy"
-    ]
   }
 
   # Uncomment this section if you want to restrict AMI access to team members
