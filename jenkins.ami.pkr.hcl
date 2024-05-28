@@ -44,7 +44,7 @@ build {
 
   # Copy necessary files first
   provisioner "file" {
-    source      = "./jenkins/jcasc.yml"
+    source      = "./jenkins/Jcasc.yml"
     destination = "/home/ubuntu/jcasc.yml"
   }
 
