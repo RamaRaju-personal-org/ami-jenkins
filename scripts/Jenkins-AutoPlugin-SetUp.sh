@@ -57,10 +57,13 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
 echo "Plugins installed successfully."
 
 #moving go jcasc.yml file from /home/ubuntu/ to /var/lib/jenkins
+echo "moving files"
 sudo mv /home/ubuntu/Jcasc.yml  /var/lib/jenkins/Jcasc.yml
 sudo mv /home/ubuntu/plugins.txt /var/lib/jenkins/plugins.txt
 sudo mv /home/ubuntu/jenkins-UserSetUp.groovy /var/lib/jenkins/jenkins-UserSetUp.groovy
+
 # Update file ownership
+echo "ownership update"
 cd /var/lib/jenkins/ || exit
 sudo chown jenkins:jenkins ./Jcasc.yml ./*.groovy ./plugins.txt
 
@@ -82,4 +85,5 @@ sudo systemctl enable jenkins
 echo "Downloading Jenkins CLI..."
 cd /home/ubuntu
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-java -jar /home/ubuntu/jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
+echo "groovy user setup"
+java -jar ./jenkins-cli.jar -auth admin:admin -s http://localhost:8080/ groovy = /var/lib/jenkins/jenkins-UserSetUp.groovy
