@@ -63,7 +63,7 @@ build {
       "./scripts/jenkins-install.sh",
       "./scripts/caddy-install.sh",
       "./scripts/install-go.sh",
-      "./scripts/Jenkins-AutoPlugin-Setup.sh"
+      "./scripts/Jenkins-AutoPlugin-SetUp.sh"
     ]
   }
 }
