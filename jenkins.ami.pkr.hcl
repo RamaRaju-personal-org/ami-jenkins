@@ -53,10 +53,7 @@ build {
     destination = "/home/ubuntu/plugins.txt"
   }
 
-  provisioner "file" {
-    source      = "./jenkins/jenkins-setup.groovy"
-    destination = "/home/ubuntu/jenkins-setup.groovy"
-  }
+
 
   provisioner "shell" {
     scripts = [
