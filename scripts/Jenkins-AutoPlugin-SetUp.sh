@@ -40,6 +40,7 @@ PLUGINS_LIST=(
   "workflow-aggregator:latest"
   "ws-cleanup:latest"
   "go:latest"
+  "groovy:latest"
 )
 
 # Write the list of plugins to plugins.txt
