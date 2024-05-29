@@ -69,6 +69,9 @@ sudo cp /home/ubuntu/Jcasc.yaml /var/lib/jenkins/
 # Make jenkins user and group owner of jenkins.yaml file
 sudo chown jenkins:jenkins /var/lib/jenkins/Jcasc.yaml
 
+# Update users and group permissions to ⁠ jenkins ⁠ for all installed plugins:
+cd /var/lib/jenkins/plugins/ || exit
+sudo chown jenkins:jenkins ./*
 
 # Disable the setup wizard by applying JCasC
 echo "Configuring JAVA_OPTS to disable setup wizard and apply JCasC configuration"
