@@ -12,7 +12,7 @@ jenkins:
       allowsSignup: false  # Disables new user signups from the Jenkins login screen, which is important for managing users strictly via configuration.
       users:
         # Creation of an admin user. This user will have access to configure Jenkins.
-        - id: "admin"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+        - id: "admin_name"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
           password: "admin"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
 
   # Defines the authorization strategy and specifies permissions for various security roles.
