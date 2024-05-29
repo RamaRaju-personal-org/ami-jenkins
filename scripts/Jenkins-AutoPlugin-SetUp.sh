@@ -62,20 +62,12 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
 
 echo "Plugins installed successfully."
 
-# Move JCasC YAML and Groovy script files
-echo "Moving files"
-sudo mv /home/ubuntu/Jcasc.yml /var/lib/jenkins/Jcasc.yml
-sudo mv /home/ubuntu/plugins.txt /var/lib/jenkins/plugins.txt
 
-# Update file ownership
-echo "Updating file ownership"
-cd /var/lib/jenkins/ || exit
-sudo chown jenkins:jenkins ./Jcasc.yml 
+# Move Jenkins config file to Jenkins home
+sudo cp /home/ubuntu/Jcasc.yaml /var/lib/jenkins/
 
-# Restart Jenkins to apply plugin installation
-echo "Restarting Jenkins service to apply plugins"
-sudo systemctl restart jenkins
-sleep 60  # Wait for Jenkins to fully restart
+# Make jenkins user and group owner of jenkins.yaml file
+sudo chown jenkins:jenkins /var/lib/jenkins/Jcasc.yaml
 
 
 # Disable the setup wizard by applying JCasC
@@ -83,7 +75,7 @@ echo "Configuring JAVA_OPTS to disable setup wizard and apply JCasC configuratio
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 {
   echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yml\""
+  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yaml\""
 } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
 # Restart Jenkins to apply JCasC configuration
