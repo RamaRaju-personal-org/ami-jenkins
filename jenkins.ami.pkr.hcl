@@ -53,8 +53,6 @@ build {
     destination = "/home/ubuntu/plugins.txt"
   }
 
-
-
   provisioner "shell" {
     scripts = [
       "./scripts/install.sh",

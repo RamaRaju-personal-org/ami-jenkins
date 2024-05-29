@@ -84,6 +84,7 @@ sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkin
 
 # Move Jenkins config file to Jenkins home
 sudo cp /home/ubuntu/jenkins.yaml /var/lib/jenkins/
+sudo cp /home/ubuntu/plugins.txt /var/lib/jenkins/plugins/
 
 # Make jenkins user and group owner of jenkins.yaml file
 sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.yaml
