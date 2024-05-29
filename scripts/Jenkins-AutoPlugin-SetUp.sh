@@ -62,8 +62,8 @@ echo "Plugins installed successfully."
 
 # Move JCasC YAML and Groovy script files
 echo "Moving files"
-sudo mv /home/ubuntu/jcasc.yml /var/lib/jenkins/Jcasc.yml
-sudo mv /home/ubuntu/jenkins-UserSetUp.groovy /var/lib/jenkins/jenkins-setup.groovy
+sudo mv /home/ubuntu/Jcasc.yml /var/lib/jenkins/Jcasc.yml
+sudo mv /home/ubuntu/jenkins-setup.groovy /var/lib/jenkins/jenkins-setup.groovy
 
 # Update file ownership
 echo "Updating file ownership"
