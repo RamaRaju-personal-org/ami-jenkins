@@ -1,45 +1,36 @@
 #!/bin/bash
 
+# Set debconf to run in non-interactive mode
+export DEBIAN_FRONTEND=noninteractive
 
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
-echo "|                                                                                                                                         |"
-echo "|                                                               INSTALL JAVA 11                                                           |"
-echo "|                                                                                                                                         |"
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
-# Update package list and install OpenJDK
-sudo apt-get install -y openjdk-11-jdk
-sleep 3
-echo "Java $(java -version)"
+# This script installs, configures and starts Jenkins on the AMI
 
+##########################################################################
+## Installing Jenkins and other dependencies
 
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
-echo "|                                                                                                                                         |"
-echo "|                                                                INSTALL JENKINS                                                          |"
-echo "|                                                                                                                                         |"
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
-# Add Jenkins key and repository
+# Update package information
+sudo apt-get update -y
 
-# Jenkins setup on Debian (stable): https://pkg.jenkins.io/debian-stable/
+# Install Java (Required by Jenkins) and Maven
+sudo apt-get install -y openjdk-11-jdk maven
 
-# Debian package repository of Jenkins to automate installation and upgrade.
-# To use this repository, first add the key to the system:
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc >/dev/null
+# Download the Jenkins repository key and saves it to /usr/share/keyrings/jenkins-keyring.asc,
+# which is used to authenticate packages
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
-# Add a Jenkins apt repository entry:
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+# Add the Jenkins repository to the packages sources list, specifying that packages from
+# this repository should be verified using the key saved in /usr/share/keyrings/jenkins-keyring.asc.
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list >/dev/null
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-# Install Jenkins:
-sudo apt-get update && sudo apt-get install jenkins -y
+# Update the package lists to include newly available packages from the added Jenkins repository.
+sudo apt-get update
 
-sleep 3
+# Install the Jenkins package from the newly added repository
+sudo apt-get install jenkins -y
 
-sudo systemctl start jenkins
-
-# Enable Jenkins service
-sudo systemctl enable jenkins
 sleep 3
 
 # Check the status of Jenkins service
@@ -48,14 +39,7 @@ sudo systemctl --full status jenkins
 # Check Jenkins version
 echo "Jenkins $(jenkins --version)"
 
-
-
-
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
-echo "|                                                                                                                                         |"
-echo "|                                                               INSTALL CADDY                                                             |"
-echo "|                                                                                                                                         |"
-echo "+-----------------------------------------------------------------------------------------------------------------------------------------+"
+#########################################################################
 
 # Caddy(stable) installation docs: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
 
@@ -69,28 +53,53 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo 
 # Install caddy:
 sudo apt-get update && sudo apt-get install caddy -y
 
-# Check the status of Caddy service
-sudo systemctl --full status caddy
-
-# Check Caddy version
-echo "Caddy $(caddy --version)"
 
 # Enable Caddy service
 sudo systemctl enable caddy
+
 
 # Remove default Caddyfile
 sudo rm /etc/caddy/Caddyfile
 
 # Create new Caddyfile for Jenkins
 sudo tee /etc/caddy/Caddyfile <<EOF
-jenkins.ramaraju.cloud {
-  reverse_proxy 127.0.0.1:8080
-  tls jenkins.ramaraju.cloud
+jenkins.hemanthnvd.com {
+  reverse_proxy http://127.0.0.1:8080
 }
 EOF
 
 # Restart Caddy service to apply new configuration
 sudo systemctl restart caddy
 
-# Enable Caddy service
-sudo systemctl enable caddy
+##########################################################################
+## Installing Plugins for Jenkins
+
+# Install Jenkins plugin manager tool to be able to install the plugins on EC2 instance
+wget --quiet \
+  https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.13/jenkins-plugin-manager-2.12.13.jar
+
+# Install plugins with jenkins-plugin-manager tool:
+sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkins.war \
+  --plugin-download-directory /var/lib/jenkins/plugins --plugin-file /home/ubuntu/plugins.txt
+
+# Move Jenkins config file to Jenkins home
+sudo cp /home/ubuntu/jenkins.yaml /var/lib/jenkins/
+
+# Make jenkins user and group owner of jenkins.yaml file
+sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.yaml
+
+# Update users and group permissions to `jenkins` for all installed plugins:
+cd /var/lib/jenkins/plugins/ || exit
+sudo chown jenkins:jenkins ./*
+
+# Configure JAVA_OPTS to disable setup wizard
+sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+{
+  echo "[Service]"
+  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jenkins.yaml\""
+} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+
+# Restart jenkins service
+sudo systemctl daemon-reload
+sudo systemctl stop jenkins
+sudo systemctl start jenkins
