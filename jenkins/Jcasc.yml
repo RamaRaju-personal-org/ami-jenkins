@@ -1,23 +1,46 @@
 jenkins:
-  systemMessage: "Configured by Jenkins Configuration as Code for golang"
+  # The system message to be displayed on the Jenkins dashboard. This is useful for providing status or environment-specific information to users.
+  systemMessage: "Automating Jenkins Setup using Jenkins Configuration as Code"
+
+  # Configuration for Jenkins remoting security. When enabled, it helps secure Jenkins' agent-to-master operations.
+  remotingSecurity:
+    enabled: true  # Ensures that remoting security is enforced, which is crucial for avoiding unauthorized command execution.
+
+  # Configuration for the security realm. This section defines how Jenkins handles authentication.
   securityRealm:
     local:
-      allowsSignup: false
+      allowsSignup: false  # Disables new user signups from the Jenkins login screen, which is important for managing users strictly via configuration.
       users:
-        - id: "admin"
-          password: "admin"
+        # Creation of an admin user. This user will have access to configure Jenkins.
+        - id: "admin"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+          password: "admin"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+
+  # Defines the authorization strategy and specifies permissions for various security roles.
   authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: true
-  tools:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:authenticated"  # Grants all authenticated users full administrative access to Jenkins.
+        - "Overall/Read:anonymous"  # Allows anonymous users to view pages in Jenkins, useful for public-facing Jenkins instances.
+
+  # Global tool configuration for installing Go
+  tool:
     go:
       installations:
-        - name: "Go"
+        - name: "Go1.17"
           home: "/usr/local/go"
-  plugins:
-    required:
-      - job-dsl
-      - configuration-as-code
-      - git
-      - workflow-aggregator
-      - go
+
+jobs:
+  - script: >
+      pipeline {
+        agent any
+        tools {
+          go "Go1.17"
+        }
+        stages {
+          stage('Build') {
+            steps {
+              sh 'go version'
+            }
+          }
+        }
+      }
