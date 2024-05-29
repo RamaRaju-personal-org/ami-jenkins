@@ -32,7 +32,7 @@ jobs:
       
       - name: Prepare JCasC file to change user credientials
         run: |
-          sed -i 's/admin/${{ secrets.JENKINS_ADMIN_USER }}/g' jenkins/Jcasc.yml
+          sed -i 's/admin_name/${{ secrets.JENKINS_ADMIN_USER }}/g' jenkins/Jcasc.yml
           sed -i 's/admin/${{ secrets.JENKINS_ADMIN_PASSWORD }}/g' jenkins/Jcasc.yml
         shell: bash
 
