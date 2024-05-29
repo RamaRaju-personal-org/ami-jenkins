@@ -78,7 +78,7 @@ echo "Configuring JAVA_OPTS to disable setup wizard and apply JCasC configuratio
 sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 {
   echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yaml\""
+  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=true -Dcasc.jenkins.config=/var/lib/jenkins/Jcasc.yaml\""
 } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
 # Restart Jenkins to apply JCasC configuration
