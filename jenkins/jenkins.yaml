@@ -1,3 +1,6 @@
+# Jenkins Configuration as Code (JCasC)
+# This configuration automates the setup of Jenkins, ensuring consistent settings across different environments.
+
 jenkins:
   # The system message to be displayed on the Jenkins dashboard. This is useful for providing status or environment-specific information to users.
   systemMessage: "Automating Jenkins Setup using Jenkins Configuration as Code"
@@ -12,8 +15,8 @@ jenkins:
       allowsSignup: false  # Disables new user signups from the Jenkins login screen, which is important for managing users strictly via configuration.
       users:
         # Creation of an admin user. This user will have access to configure Jenkins.
-        - id: "admin_name"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
-          password: "admin"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+        - id: "ADMIN_USER"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+          password: "ADMIN_PASSWORD"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
 
   # Defines the authorization strategy and specifies permissions for various security roles.
   authorizationStrategy:
