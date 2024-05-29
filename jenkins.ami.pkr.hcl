@@ -44,8 +44,8 @@ build {
 
   # Copy necessary files first
   provisioner "file" {
-    source      = "./jenkins/jcasc.yml"
-    destination = "/home/ubuntu/jcasc.yml"
+    source      = "./jenkins/Jcasc.yml"
+    destination = "/home/ubuntu/Jcasc.yml"
   }
 
   provisioner "file" {
@@ -63,7 +63,7 @@ build {
       "./scripts/jenkins-install.sh",
       "./scripts/caddy-install.sh",
       "./scripts/install-go.sh",
-      "./scripts/jenkins-AutoPlugin-Setup.sh"
+      "./scripts/Jenkins-AutoPlugin-Setup.sh"
     ]
   }
 }

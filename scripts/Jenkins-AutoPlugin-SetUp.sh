@@ -63,13 +63,13 @@ echo "Plugins installed successfully."
 
 # Move JCasC YAML and Groovy script files
 echo "Moving files"
-sudo mv /home/ubuntu/jcasc.yml  /var/lib/jenkins/jcasc.yml
+sudo mv /home/ubuntu/Jcasc.yml  /var/lib/jenkins/Jcasc.yml
 sudo mv /home/ubuntu/jenkins-setup.groovy /var/lib/jenkins/jenkins-setup.groovy
 
 # Update file ownership
 echo "Updating file ownership"
 cd /var/lib/jenkins/ || exit
-sudo chown jenkins:jenkins ./jcasc.yml ./*.groovy
+sudo chown jenkins:jenkins ./Jcasc.yml ./*.groovy
 
 # Configure JAVA_OPTS to disable setup wizard and apply JCasC configuration
 echo "Configuring JAVA_OPTS to disable setup wizard and apply JCasC configuration"
