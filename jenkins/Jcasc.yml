@@ -21,3 +21,30 @@ jenkins:
       - git
       - workflow-aggregator
       - go
+  jobs:
+    - script: >
+        pipelineJob('Run Groovy Script') {
+          definition {
+            cps {
+              script('''
+                pipeline {
+                  agent any
+                  stages {
+                    stage('Run Groovy Script') {
+                      steps {
+                        script {
+                          def groovyScript = new File('/var/lib/jenkins/jenkins-setup.groovy')
+                          evaluate(groovyScript)
+                        }
+                      }
+                    }
+                  }
+                }
+              '''.stripIndent())
+              sandbox()
+            }
+          }
+        }
+  seedJobs:
+    - name: "Run Groovy Script"
+      scriptPath: "seed.groovy"
