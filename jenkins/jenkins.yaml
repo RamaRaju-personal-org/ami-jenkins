@@ -16,11 +16,15 @@ jenkins:
       users:
         # Creation of an admin user. This user will have access to configure Jenkins.
         - id: "ADMIN_USER"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
+          name: "ADMIN_USER"
           password: "ADMIN_PASSWORD"  # Placeholder to be replaced with GitHub secrets via GitHub Actions workflow
 
   # Defines the authorization strategy and specifies permissions for various security roles.
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Overall/Administer:authenticated"  # Grants all authenticated users full administrative access to Jenkins.
-        - "Overall/Read:anonymous"  # Allows anonymous users to view pages in Jenkins, useful for public-facing Jenkins instances.
+        - "Overall/Administer:ADMIN_USER"
+
+unclassified:
+  location:
+    url: https://jenkins.ramaraju.cloud
