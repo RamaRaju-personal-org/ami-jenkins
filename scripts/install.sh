@@ -74,13 +74,15 @@ sudo systemctl restart caddy
 ##########################################################################
 ## Installing Plugins for Jenkins
 
+cd /home/ubuntu/
+
 # Install Jenkins plugin manager tool to be able to install the plugins on EC2 instance
 wget --quiet \
   https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.13/jenkins-plugin-manager-2.12.13.jar
 
 # Install plugins with jenkins-plugin-manager tool:
 sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkins.war \
-  --plugin-download-directory /var/lib/jenkins/plugins --plugin-file /home/ubuntu/plugins.txt
+  --plugin-download-directory /var/lib/jenkins/plugins --plugin-file plugins.txt
 
 # Move Jenkins config file to Jenkins home
 sudo cp /home/ubuntu/jenkins.yaml /var/lib/jenkins/
