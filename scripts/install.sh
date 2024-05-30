@@ -84,6 +84,8 @@ wget --quiet \
 sudo java -jar ./jenkins-plugin-manager-2.12.13.jar --war /usr/share/java/jenkins.war \
   --plugin-download-directory /var/lib/jenkins/plugins --plugin-file plugins.txt
 
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
 # Move Jenkins config file to Jenkins home
 sudo cp /home/ubuntu/jenkins.yaml /var/lib/jenkins/
 sudo cp /home/ubuntu/plugins.txt /var/lib/jenkins/plugins/
@@ -96,11 +98,11 @@ cd /var/lib/jenkins/plugins/ || exit
 sudo chown jenkins:jenkins ./*
 
 # Configure JAVA_OPTS to disable setup wizard
-sudo mkdir -p /etc/systemd/system/jenkins.service.d/
-{
-  echo "[Service]"
-  echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jenkins.yaml\""
-} | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+# sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+# {
+#   echo "[Service]"
+#   echo "Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false -Dcasc.jenkins.config=/var/lib/jenkins/jenkins.yaml\""
+# } | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
 
 # Restart jenkins service
 sudo systemctl daemon-reload
