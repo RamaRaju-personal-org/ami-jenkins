@@ -24,7 +24,3 @@ jenkins:
     globalMatrix:
       permissions:
         - "Overall/Administer:ADMIN_USER"
-
-unclassified:
-  location:
-    url: https://jenkins.ramaraju.cloud
