@@ -63,7 +63,7 @@ sudo rm /etc/caddy/Caddyfile
 
 # Create new Caddyfile for Jenkins
 sudo tee /etc/caddy/Caddyfile <<EOF
-jenkins.ramaraju.cloud {
+cicd.ramaraju.cloud {
   reverse_proxy http://127.0.0.1:8080
 }
 EOF
