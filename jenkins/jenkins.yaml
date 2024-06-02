@@ -24,3 +24,14 @@ jenkins:
     globalMatrix:
       permissions:
         - "Overall/Administer:ADMIN_USER"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "docker-hub-credentials-id"
+              description: "Docker Hub Credentials"
+              username: "docker_hub_username"  # Replace with your Docker Hub username or use Jenkins secrets
+              password: "docker_hub_password"  # Replace with your Docker Hub password or use Jenkins secrets

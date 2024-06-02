@@ -41,6 +41,22 @@ echo "Jenkins $(jenkins --version)"
 
 #########################################################################
 
+# install docker 
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+apt-cache policy docker-ce
+sudo apt install docker-ce
+sudo systemctl status docker
+
+#If you want to avoid typing sudo whenever you run the docker command, add your username to the docker group:
+sudo chmod 666 /var/run/docker.sock
+sudo usermod -aG docker jenkins
+
+##########################################################################
+
+
 # Caddy(stable) installation docs: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
 
 # Install and configure keyring for caddy stable release:
@@ -63,7 +79,7 @@ sudo rm /etc/caddy/Caddyfile
 
 # Create new Caddyfile for Jenkins
 sudo tee /etc/caddy/Caddyfile <<EOF
-cicd.ramaraju.cloud {
+jenkins.ramaraju.cloud {
   reverse_proxy http://127.0.0.1:8080
 }
 EOF
