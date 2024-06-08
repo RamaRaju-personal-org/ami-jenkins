@@ -50,13 +50,13 @@ jobs:
                   scm {
                       git {
                           remote {
-                              url('git_repo_url')
+                              url('git_jenkins_ami_repo_url')
                               credentials('github-credentials-id')
                           }
                           branch('main')
                       }
                   }
-                  scriptPath('build-docker-image.groovy')
+                  scriptPath('jenkins/build-docker-image.groovy')
               }
           }
       }
