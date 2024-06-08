@@ -5,7 +5,7 @@ pipelineJob('static-site-build-and-deploy') {
 pipeline {
     agent any 
     environment {
-        GIT_REPO = 'git_repo_url'
+        GIT_REPO = 'git_static_site_repo_url'
         GIT_BRANCH = 'main'
         GIT_CREDENTIALS_ID = 'github-credentials-id'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
