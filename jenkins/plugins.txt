@@ -36,4 +36,5 @@ timestamper:latest
 workflow-aggregator:latest
 ws-cleanup:latest
 golang:latest
+job-dsl:latest
 
