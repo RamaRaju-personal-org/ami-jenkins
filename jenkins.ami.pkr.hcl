@@ -59,6 +59,11 @@ build {
     source      = "./jenkins/build-docker-image.groovy"
     destination = "/home/ubuntu/build-docker-image.groovy"
   }
+  
+  provisioner "file" {
+    source      = "./jenkins/Jenkinsfile"
+    destination = "/home/ubuntu/Jenkinsfile"
+  }
 
   provisioner "shell" {
     scripts = [

@@ -119,10 +119,12 @@ sudo cp /home/ubuntu/plugins.txt /var/lib/jenkins/plugins/
 
 # Copy DSL job files to Jenkins home
 sudo cp /home/ubuntu/build-docker-image.groovy /var/lib/jenkins/
+sudo cp /home/ubuntu/Jenkinsfile /var/lib/jenkins/Jenkinsfile
 
 # Make jenkins user and group owner of jenkins.yaml file
 sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.yaml
 sudo chown jenkins:jenkins /var/lib/jenkins/build-docker-image.groovy
+sudo chown jenkins:jenkins /var/lib/jenkins/Jenkinsfile
 
 # Update users and group permissions to `jenkins` for all installed plugins:
 cd /var/lib/jenkins/plugins/ || exit
