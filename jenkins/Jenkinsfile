@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        GIT_REPO = 'git_static_site_repo_url'
+        GIT_REPO = 'https://github.com/RamaRaju-personal-org/static-site.git'
         GIT_BRANCH = 'main'
         GIT_CREDENTIALS_ID = 'github-credentials-id'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
