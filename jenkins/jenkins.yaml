@@ -43,4 +43,4 @@ credentials:
               secret: "git_token"  # Replace with your GitHub token or use Jenkins secrets
 
 jobs:
-  - file: ./jenkins/build-docker-image.groovy
+  - file: /var/lib/jenkins/build-docker-image.groovy
