@@ -1,0 +1,31 @@
+name: Build Jenkins AMI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: "latest"
+
+      - name: Packer format
+        id: fmt
+        run: "packer fmt ."
+
+      - name: Packer init
+        id: init
+        run: "packer init ."
+
+      - name: Validate Packer template
+        run: packer validate .
