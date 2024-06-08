@@ -35,28 +35,28 @@ credentials:
               description: "Docker Hub Credentials"
               username: "docker_hub_username"  # Replace with your Docker Hub username or use Jenkins secrets
               password: "docker_hub_password"  # Replace with your Docker Hub password or use Jenkins secrets
-          - credentials:
+      - credentials:
           - string:
               scope: GLOBAL
               id: "github-credentials-id"
               description: "GitHub Personal Access Token"
               secret: "git_token"  # Replace with your GitHub token or use Jenkins secrets
 
-# jobs:
-#   - script: >
-#       pipelineJob('seed-job') {
-#           definition {
-#               cpsScm {
-#                   scm {
-#                       git {
-#                           remote {
-#                               url('git_repo_url')
-#                               credentials('github-credentials-id')
-#                           }
-#                           branch('main')
-#                       }
-#                   }
-#                   scriptPath('build-docker-image.groovy')
-#               }
-#           }
-#       }
+jobs:
+  - script: >
+      pipelineJob('seed-job') {
+          definition {
+              cpsScm {
+                  scm {
+                      git {
+                          remote {
+                              url('git_repo_url')
+                              credentials('github-credentials-id')
+                          }
+                          branch('main')
+                      }
+                  }
+                  scriptPath('build-docker-image.groovy')
+              }
+          }
+      }
