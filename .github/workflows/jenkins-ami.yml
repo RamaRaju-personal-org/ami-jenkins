@@ -37,7 +37,7 @@ jobs:
           sed -i 's/docker_hub_username/${{ secrets.docker_hub_username }}/g' jenkins/jenkins.yaml
           sed -i 's/docker_hub_password/${{ secrets.docker_hub_password }}/g' jenkins/jenkins.yaml
           sed -i 's/git_static_site_repo_url/${{ secrets.GIT_STATIC_SITE_REPO_URL }}/g' jenkins/build-docker-image.groovy
-          sed -i 's/GITHUB_TOKEN/${{ secrets.GIT_TOKEN }}/g' jenkins/jenkins.yaml
+          sed -i "s/GITHUB_TOKEN/${{ secrets.GIT_TOKEN }}/g" jenkins/jenkins.yaml
  
         shell: bash
 
