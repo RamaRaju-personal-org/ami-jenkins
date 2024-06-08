@@ -1,4 +1,4 @@
-pipelineJob('static-site-build-and-deploy') {
+pipelineJob('StaticSitePipeline') {
     definition {
         cps {
             script('''
@@ -45,6 +45,7 @@ pipeline {
     }
 }
             ''')
+            sandbox()
         }
     }
 }
