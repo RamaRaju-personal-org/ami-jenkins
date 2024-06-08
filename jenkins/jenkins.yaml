@@ -43,20 +43,4 @@ credentials:
               secret: "git_token"  # Replace with your GitHub token or use Jenkins secrets
 
 jobs:
-  - script: >
-      pipelineJob('seed-job') {
-          definition {
-              cpsScm {
-                  scm {
-                      git {
-                          remote {
-                              url('git_jenkins_ami_repo_url')
-                              credentials('github-credentials-id')
-                          }
-                          branch('main')
-                      }
-                  }
-                  scriptPath('jenkins/build-docker-image.groovy')
-              }
-          }
-      }
+  - file: ./jenkins/build-docker-image.groovy
