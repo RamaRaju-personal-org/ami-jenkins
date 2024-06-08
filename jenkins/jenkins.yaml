@@ -43,12 +43,5 @@ credentials:
               secret: "git_token"  # Replace with your GitHub token or use Jenkins secrets
 
 jobs:
-  - script: >
-      pipelineJob('StaticSitePipeline') {
-          definition {
-              cps {
-                  script(readFileFromWorkspace('/var/lib/jenkins/build-docker-image.groovy'))
-                  sandbox()
-              }
-          }
-      }
+  - file: "./build-docker-image.groovy"
+  
