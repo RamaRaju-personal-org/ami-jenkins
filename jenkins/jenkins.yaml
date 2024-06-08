@@ -42,21 +42,21 @@ credentials:
               description: "GitHub Personal Access Token"
               secret: "git_token"  # Replace with your GitHub token or use Jenkins secrets
 
-jobs:
-  - script: >
-      pipelineJob('seed-job') {
-          definition {
-              cpsScm {
-                  scm {
-                      git {
-                          remote {
-                              url('git_repo_url')
-                              credentials('github-credentials-id')
-                          }
-                          branch('main')
-                      }
-                  }
-                  scriptPath('build-docker-image.groovy')
-              }
-          }
-      }
+# jobs:
+#   - script: >
+#       pipelineJob('seed-job') {
+#           definition {
+#               cpsScm {
+#                   scm {
+#                       git {
+#                           remote {
+#                               url('git_repo_url')
+#                               credentials('github-credentials-id')
+#                           }
+#                           branch('main')
+#                       }
+#                   }
+#                   scriptPath('build-docker-image.groovy')
+#               }
+#           }
+#       }
