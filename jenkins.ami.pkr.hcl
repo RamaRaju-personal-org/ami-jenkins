@@ -17,9 +17,6 @@ variable "ami_name" {
   default = "jenkins-ami"
 }
 
-variable "github_token" {
-  type = string
-}
 
 
 variable "team_account_ids" {
