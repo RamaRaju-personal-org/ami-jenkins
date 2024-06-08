@@ -116,7 +116,8 @@ sudo cp /home/ubuntu/plugins.txt /var/lib/jenkins/plugins/
 sudo cp /home/ubuntu/build-docker-image.groovy /var/lib/jenkins/
 
 # Make jenkins user and group owner of jenkins.yaml file
-sudo chown jenkins:jenkins /var/lib/jenkins/*
+sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.yaml
+sudo chown jenkins:jenkins /var/lib/jenkins/build-docker-image.groovy
 
 # Update users and group permissions to `jenkins` for all installed plugins:
 cd /var/lib/jenkins/plugins/ || exit
