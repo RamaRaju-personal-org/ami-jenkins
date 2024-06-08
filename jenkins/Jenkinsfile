@@ -16,7 +16,7 @@ pipeline {
         stage("clone static-site repo") {
             steps {
                 echo "cloning the repo"
-                withCredentials([string(credentialsId: "${GIT_CREDENTIALS_ID}", variable: 'GIT_TOKEN')]) {
+                    withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
                         git config --global credential.helper cache
                         git config --global url.https://${GIT_TOKEN}@github.com/.insteadOf https://github.com/
