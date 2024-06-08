@@ -22,6 +22,10 @@ sudo rm /etc/caddy/Caddyfile
 
 # Create new Caddyfile for Jenkins
 sudo tee /etc/caddy/Caddyfile <<EOF
+{
+    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
 jenkins.ramaraju.cloud {
   reverse_proxy http://127.0.0.1:8080
 }

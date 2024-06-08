@@ -112,8 +112,11 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 sudo cp /home/ubuntu/jenkins.yaml /var/lib/jenkins/
 sudo cp /home/ubuntu/plugins.txt /var/lib/jenkins/plugins/
 
+# Copy DSL job files to Jenkins home
+sudo cp /home/ubuntu/build-docker-image.groovy /var/lib/jenkins/
+
 # Make jenkins user and group owner of jenkins.yaml file
-sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.yaml
+sudo chown jenkins:jenkins /var/lib/jenkins/*
 
 # Update users and group permissions to `jenkins` for all installed plugins:
 cd /var/lib/jenkins/plugins/ || exit

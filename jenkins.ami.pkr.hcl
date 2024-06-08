@@ -17,6 +17,11 @@ variable "ami_name" {
   default = "jenkins-ami"
 }
 
+variable "github_token" {
+  type = string
+}
+
+
 variable "team_account_ids" {
   type    = list(string)
   default = ["058264431172"] # Replace with your team's AWS account IDs
@@ -51,6 +56,11 @@ build {
   provisioner "file" {
     source      = "./jenkins/plugins.txt"
     destination = "/home/ubuntu/plugins.txt"
+  }
+
+   provisioner "file" {
+    source      = "./jenkins/build-docker-image.groovy"
+    destination = "/home/ubuntu/build-docker-image.groovy"
   }
 
   provisioner "shell" {
