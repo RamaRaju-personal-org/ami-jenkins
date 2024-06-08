@@ -40,7 +40,7 @@ credentials:
               scope: GLOBAL
               id: "github-credentials-id"
               description: "GitHub Personal Access Token"
-              secret: "${GITHUB_TOKEN}"  # Replace with your GitHub token or use Jenkins secrets
+              secret: "GITHUB_TOKEN"  # Replace with your GitHub token or use Jenkins secrets
 
 jobs:
   - file: "./build-docker-image.groovy"
