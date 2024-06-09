@@ -5,7 +5,7 @@ pipelineJob('docker-build-and-push') {
                 git {
                     remote {
                         url('jenkins_ami_git_url')  // Replace with your GitHub repository URL
-                        credentials('github-credentials-id')
+                        credentials('git-personal-access-token')
                     }
                     branch('*/main')
                 }
