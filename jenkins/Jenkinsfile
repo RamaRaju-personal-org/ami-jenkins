@@ -3,7 +3,7 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/RamaRaju-personal-org/static-site.git'
         GIT_BRANCH = 'main'
-        GIT_CREDENTIALS_ID = 'github-credentials-id'
+        GIT_CREDENTIALS_ID = 'git-personal-access-token'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
     }
     stages {
@@ -13,26 +13,24 @@ pipeline {
             }
         }
 
-        // stage("clone static-site repo") {
-        //     steps {
-        //         echo "cloning the repo"
-        //             withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-        //             sh '''
-        //                 git config --global credential.helper cache
-        //                 git config --global url.https://${GIT_TOKEN}@github.com/.insteadOf https://github.com/
-        //                 git clone --branch ${GIT_BRANCH} ${GIT_REPO}
-        //             '''
-        //         }
-        //     }
-        // }
-        
-        stage("build the caddy image and push") {
+        stage("Clone static-site repo") {
             steps {
-                echo "building the image"
+                echo "Cloning the repo"
+                withCredentials([string(credentialsId: "${GIT_CREDENTIALS_ID}", variable: 'GIT_TOKEN')]) {
+                    sh '''
+                        git clone --branch ${GIT_BRANCH} https://${GIT_TOKEN}@github.com/RamaRaju-personal-org/static-site.git
+                    '''
+                }
+            }
+        }
+        
+        stage("Build the caddy image and push") {
+            steps {
+                echo "Building the image"
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh '''
-                        docker build -t ram2305/caddy:3.0 .
-                        docker login -u $USER -p $PASS
+                        docker build -t ram2305/caddy:3.0 -f static-site/Dockerfile static-site
+                        echo $PASS | docker login -u $USER --password-stdin
                         docker push ram2305/caddy:3.0
                     '''
                 }

@@ -36,12 +36,11 @@ credentials:
               username: "docker_hub_username"  # Replace with your Docker Hub username or use Jenkins secrets
               password: "docker_hub_password"  # Replace with your Docker Hub password or use Jenkins secrets
       - credentials:
-          - usernamePassword:
+          - string:
               scope: GLOBAL
-              id: "github-credentials-id"
-              description: "git hub credentials"
-              username: "git_username"  # Replace with your Docker Hub username or use Jenkins secrets
-              password: "GITHUB_TOKEN"  # Replace with your Docker Hub password or use Jenkins secrets
+              id: "git-personal-access-token"
+              description: "GitHub Personal Access Token"
+              secret: "GITHUB_TOKEN"  # Replace with your GitHub token
 
 jobs:
   - file: ./build-docker-image.groovy
