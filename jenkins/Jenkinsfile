@@ -16,7 +16,7 @@ pipeline {
         stage("Clone static-site repo") {
             steps {
                 echo "Cloning the repo"
-                withCredentials([string(credentialsId: "${GIT_CREDENTIALS_ID}", variable: 'GIT_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS_ID}", passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
                         git clone --branch ${GIT_BRANCH} https://${GIT_TOKEN}@github.com/RamaRaju-personal-org/static-site.git
                     '''
@@ -29,9 +29,9 @@ pipeline {
                 echo "Building the image"
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh '''
-                        docker build -t ram2305/caddy:3.0 -f static-site/Dockerfile static-site
+                        docker build -t ram2305/caddy:4.0 -f static-site/Dockerfile static-site
                         echo $PASS | docker login -u $USER --password-stdin
-                        docker push ram2305/caddy:3.0
+                        docker push ram2305/caddy:4.0
                     '''
                 }
             }
