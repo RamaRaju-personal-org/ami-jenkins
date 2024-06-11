@@ -37,4 +37,5 @@ workflow-aggregator:latest
 ws-cleanup:latest
 golang:latest
 job-dsl:latest
+conventional-commits:latest
 
