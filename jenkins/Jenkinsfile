@@ -1,5 +1,11 @@
 pipeline {
     agent any 
+    triggers {
+        // Polling the SCM to detect changes
+        pollSCM('* * * * *') // This configuration polls the SCM every minute (adjust as needed)
+        // GitHub webhook trigger
+        githubPush()
+    }
     environment {
         GIT_REPO = 'https://github.com/RamaRaju-personal-org/static-site.git'
         GIT_BRANCH = 'main'
