@@ -35,7 +35,7 @@ pipeline {
                 echo "Building the image"
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh '''
-                        docker build -t ram2305/caddy:${BUILD_NUMBER} -f ami-jenkins/static-site/Dockerfile static-site
+                        docker build -t ram2305/caddy:${BUILD_NUMBER} -f ami-jenkins/static-site/Dockerfile ami-jenkins/static-site
                         echo $PASS | docker login -u $USER --password-stdin
                         docker push ram2305/caddy:${BUILD_NUMBER}
                     '''
