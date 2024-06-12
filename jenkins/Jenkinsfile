@@ -7,7 +7,7 @@ pipeline {
         githubPush()
     }
     environment {
-        GIT_REPO = 'https://github.com/RamaRaju-personal-org/static-site.git'
+        GIT_REPO = 'https://github.com/RamaRaju-personal-org/ami-jenkins.git'
         GIT_BRANCH = 'main'
         GIT_CREDENTIALS_ID = 'git-personal-access-token'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
@@ -24,7 +24,7 @@ pipeline {
                 echo "Cloning the repo"
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS_ID}", passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
-                        git clone --branch ${GIT_BRANCH} https://${GIT_TOKEN}@github.com/RamaRaju-personal-org/static-site.git
+                        git clone --branch ${GIT_BRANCH} https://${GIT_TOKEN}@github.com/RamaRaju-personal-org/ami-jenkins.git
                     '''
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                 echo "Building the image"
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh '''
-                        docker build -t ram2305/caddy:${BUILD_NUMBER} -f static-site/Dockerfile static-site
+                        docker build -t ram2305/caddy:${BUILD_NUMBER} -f ami-jenkins/static-site/Dockerfile static-site
                         echo $PASS | docker login -u $USER --password-stdin
                         docker push ram2305/caddy:${BUILD_NUMBER}
                     '''
