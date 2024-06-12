@@ -14,6 +14,35 @@ fix private clone repo
 ### Features
 
 * **build_number:** bUILD_NUMBER update for docker image e1e9cb4
+* docker file 059ffc2
+* docker file addition 2bbc145
+* docker file addition 2874d8a
+* docker file addition 6c7d713
+* folder location update b39c5e0
+* **plugin:** add conventional commit plugin 3c0eb2f
+* **run groovy:** execute in same script b7166f5
+
+
+### Bug Fixes
+
+* **caddy prod:** enabled caddy for production 9fb9489
+* enable setup wizard e62780a
+
+
+* **readme update:** update readme 636fa7f
+
+## 2.0.0 (2024-06-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **readme update:** the cicd webhook trigger
+
+fix private clone repo
+
+### Features
+
+* **build_number:** bUILD_NUMBER update for docker image e1e9cb4
 * docker file addition b43af89
 * docker file addition 8c9a679
 * **plugin:** add conventional commit plugin 3c0eb2f
