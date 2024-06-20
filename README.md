@@ -1,4 +1,4 @@
-# ami-jenkins..
+# ami-jenkins
 
 
 added standard version 
