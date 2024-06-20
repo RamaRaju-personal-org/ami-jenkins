@@ -18,16 +18,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '20'
 
       - name: Install Commitlint
         run: npm install @commitlint/config-conventional @commitlint/cli
 
       - name: Create Commitlint configuration
         run: |
-          echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+            echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+
+      - name: Verify Node.js installation
+        run: node -v
 
       - name: Run Commitlint on the latest commit
         run: |
