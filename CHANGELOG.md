@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](///compare/v3.2.0...v3.3.0) (2024-06-20)
+
+
+### Features
+
+* changelog update aff535a
+
 ## [3.2.0](///compare/v3.1.0...v3.2.0) (2024-06-20)
 
 
