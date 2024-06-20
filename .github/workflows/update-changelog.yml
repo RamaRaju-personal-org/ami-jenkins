@@ -33,9 +33,9 @@ jobs:
           file_pattern: CHANGELOG.md
           commit_user_name: github-actions[bot]
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
 
       - name: Push changes
         run: git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
