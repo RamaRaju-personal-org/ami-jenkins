@@ -1,33 +1,35 @@
-name: Conventional Commits
+name: Enforce Conventional Commits
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - edited
 
 jobs:
-  build:
-    name: Conventional Commits
+  commitlint:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Get recent commit message
-        id: get_commit
-        run: |
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "COMMIT_MSG=$COMMIT_MSG" >> $GITHUB_ENV
-
-      - name: Check commit message format
-        run: |
-          if ! [[ "${{ env.COMMIT_MSG }}" =~ ^(feat|fix):\s.{1,} ]]; then
-            echo "Commit message '${{ env.COMMIT_MSG }}' does not follow Conventional Commits format."
-            exit 1
-          else
-            echo "Commit message follows Conventional Commits format."
-          fi
-
-      - uses: webiny/action-conventional-commits@v1.3.0
-        if: ${{ success() }} # Only run if the previous step succeeded
+      - name: Install Node.js
+        uses: actions/setup-node@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Optional, for private repositories.
-          allowed-commit-types: "feat,fix" # Optional, set if you want a subset of commit types to be allowed.
+          node-version: '14'
+
+      - name: Install Commitlint
+        run: npm install @commitlint/config-conventional @commitlint/cli
+
+      - name: Create Commitlint configuration
+        run: |
+          echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+
+      - name: Run Commitlint
+        run: |
+          latest_commit=$(git log -1 --pretty=format:"%H")
+          npx commitlint --from=$latest_commit --to=$latest_commit
