@@ -11,7 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Get recent commit message
+        id: get_commit
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
       - uses: webiny/action-conventional-commits@v1.3.0
         with:
           GITHUB_TOKEN: ${{ secrets.PAT }} # Optional, for private repositories.
           allowed-commit-types: "feat,fix,chore,docs,style,refactor" # Optional, set if you want a subset of commit types to be allowed.
+          commit-message: ${{ env.COMMIT_MSG }}
