@@ -2,7 +2,7 @@ name: Conventional Commits
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -14,19 +14,20 @@ jobs:
       - name: Get recent commit message
         id: get_commit
         run: |
-          LATEST_COMMIT=$(git rev-parse HEAD)
-          COMMIT_MSG=$(git log -1 --pretty=%B $LATEST_COMMIT)
-          if [[ "$COMMIT_MSG" =~ ^Merge ]]; then
-            LATEST_COMMIT=$(git rev-parse HEAD~1)
-            COMMIT_MSG=$(git log -1 --pretty=%B $LATEST_COMMIT)
-          fi
+          COMMIT_MSG=$(git log -1 --pretty=%B)
           echo "COMMIT_MSG=$COMMIT_MSG" >> $GITHUB_ENV
 
       - name: Check commit message format
         run: |
-          if ! [[ "${{ env.COMMIT_MSG }}" =~ ^(feat|fix|chore|docs|style|refactor)\(\S+\):\s.{1,} ]]; then
+          if ! [[ "${{ env.COMMIT_MSG }}" =~ ^(feat|fix):\s.{1,} ]]; then
             echo "Commit message '${{ env.COMMIT_MSG }}' does not follow Conventional Commits format."
             exit 1
           else
             echo "Commit message follows Conventional Commits format."
           fi
+
+      - uses: webiny/action-conventional-commits@v1.3.0
+        if: ${{ success() }} # Only run if the previous step succeeded
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Optional, for private repositories.
+          allowed-commit-types: "feat,fix" # Optional, set if you want a subset of commit types to be allowed.
