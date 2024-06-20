@@ -3,11 +3,11 @@ name: Build Jenkins AMI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   buildAmi:
-    if: github.repository == 'RamaRaju-personal-org/ami-jenkins' && github.ref == 'refs/heads/main'
+    if: github.repository == 'RamaRaju-personal-org/ami-jenkins' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
