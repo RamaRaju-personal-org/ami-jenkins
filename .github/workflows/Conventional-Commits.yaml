@@ -4,7 +4,8 @@ on:
   pull_request:
     branches:
       - main
-      
+      - development
+      - staging
     types:
       - opened
       - reopened
@@ -18,13 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Validate all commits
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT }} # your personal access token
           fetch-depth: 0
 
+      - name: Fetch all branches
+        run: git fetch --all
+
       - name: Conventional Commits Checker
-        uses: netodevel/convetional-commits-checker@v1.0.1
+        uses: netodevel/conventional-commits-checker@v1.0.1
         id: commits-check
         with:
           # do not change the order of params
