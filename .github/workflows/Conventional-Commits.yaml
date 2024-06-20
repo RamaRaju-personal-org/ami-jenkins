@@ -15,8 +15,11 @@ jobs:
         id: get_commit
         run: echo "COMMIT_MSG=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
 
-      - uses: webiny/action-conventional-commits@v1.3.0
-        with:
-          GITHUB_TOKEN: ${{ secrets.PAT }} # Optional, for private repositories.
-          allowed-commit-types: "feat,fix,chore,docs,style,refactor" # Optional, set if you want a subset of commit types to be allowed.
-          commit-message: ${{ env.COMMIT_MSG }}
+      - name: Check commit message format
+        run: |
+          if ! [[ "${{ env.COMMIT_MSG }}" =~ ^(feat|fix|chore|docs|style|refactor)\(\S+\):\s.{1,} ]]; then
+            echo "Commit message '${{ env.COMMIT_MSG }}' does not follow Conventional Commits format."
+            exit 1
+          else
+            echo "Commit message follows Conventional Commits format."
+          fi
