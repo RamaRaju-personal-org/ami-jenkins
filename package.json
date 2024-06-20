@@ -1,6 +1,6 @@
 {
   "name": "ami-jenkins",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "description": "added standard version This has code for installing jenkins on linux machine and creating an AMI",
   "main": "release.config.js",
   "scripts": {
