@@ -1,0 +1,15 @@
+{
+  "name": "ami-jenkins",
+  "version": "1.0.0",
+  "description": "added standard version This has code for installing jenkins on linux machine and creating an AMI",
+  "main": "release.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "semantic-release": "^19.0.0",
+    "@semantic-release/git": "^10.0.0"
+  }
+}
