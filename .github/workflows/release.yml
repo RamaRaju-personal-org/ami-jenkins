@@ -18,9 +18,15 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      # Uncomment the following line if a build step is necessary
       # - run: npm run build
-      - run: npm install
-      - run: npx semantic-release 
+      - run: npx standard-version
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git push --follow-tags origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
