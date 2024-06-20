@@ -11,6 +11,8 @@
     ],
     "commitUrlFormat": "https://github.com/RamaRaju-personal-org/ami-jenkins/commit/{{hash}}",
     "compareUrlFormat": "https://github.com/RamaRaju-personal-org/ami-jenkins/compare/{{previousTag}}...{{currentTag}}",
-    "issueUrlFormat": "https://github.com/RamaRaju-personal-org/ami-jenkins/issues/{{id}}"
+    "issueUrlFormat": "https://github.com/RamaRaju-personal-org/ami-jenkins/issues/{{id}}",
+    "releaseCommitMessageFormat": "chore(release): {{currentTag}} [skip ci]",
+    "userUrlFormat": "https://github.com/{{user}}"
   }
   
