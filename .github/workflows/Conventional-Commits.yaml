@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 
-      - name: Run Commitlint
+      - name: Run Commitlint on the latest commit
         run: |
-          latest_commit=$(git log -1 --pretty=format:"%H")
-          npx commitlint --from=$latest_commit --to=$latest_commit
+          latest_commit=$(git rev-parse HEAD)
+          git log -1 $latest_commit --pretty=%B | npx commitlint
