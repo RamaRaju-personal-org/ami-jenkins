@@ -20,6 +20,15 @@ jobs:
       - run: npm ci
       # Uncomment the following line if a build step is necessary
       # - run: npm run build
+      - name: Configure Git user
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: npx standard-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        run: |
+          git push --follow-tags origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
