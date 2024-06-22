@@ -232,7 +232,7 @@ sudo apt update # required to refresh apt with the newly installed keys
 sudo apt install caddy -y
 ```
 
-To configure reverse-proxy with Caddy, refer the [official documentation here](https://caddyserver.com/docs/quick-starts/reverse-proxy).
+To configure reverse-proxy with Caddy, refer the [official documentation here](https://caddyserver.com/docs/quick-starts/reverse-proxy)
 #### Example
 ```bash
 vi /etc/caddy/Caddyfile
