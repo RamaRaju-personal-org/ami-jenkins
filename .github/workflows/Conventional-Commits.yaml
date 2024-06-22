@@ -34,5 +34,6 @@ jobs:
 
       - name: Run Commitlint on the latest commit
         run: |
-          latest_commit=$(git rev-parse HEAD)
-          git log -1 $latest_commit --pretty=%B | npx commitlint
+          npx husky-init && npm install -y
+          npx --no-install commitlint --edit "$1"
+
