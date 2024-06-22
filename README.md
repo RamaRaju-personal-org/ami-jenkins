@@ -288,7 +288,7 @@ cd /var/lib/jenkins/plugins/ || exit
 sudo chown jenkins:jenkins ./*
 ```
 
-### 🧾 JCasC
+### 🧾 JCasC (Jenkins Configuration As Code)
 
 In order to configure Jenkins with Configuration as Code, we need to define a `yaml` file with some basic fields:
 
