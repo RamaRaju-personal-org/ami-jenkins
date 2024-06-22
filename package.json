@@ -4,8 +4,7 @@
   "description": "added standard version  This has code for installing jenkins on linux machine and creating an AMI",
   "main": "release.config.js",
   "scripts": {
-    "test": "echo \"No tests specified\"",
-    "prepare": "husky install"
+    "test": "echo \"No tests specified\""
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,6 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.6",
-    "semantic-release": "^24.0.0",
-    "husky": "^8.0.0"
+    "semantic-release": "^24.0.0"
   }
 }
