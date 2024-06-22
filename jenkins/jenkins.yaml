@@ -3,7 +3,7 @@
 
 jenkins:
   # The system message to be displayed on the Jenkins dashboard. This is useful for providing status or environment-specific information to users.
-  systemMessage: "Automating Jenkins Setup using Jenkins Configuration as Code"
+  systemMessage: "Automating Jenkins Setup using Jenkins Configuration as Code JCASC "
 
   # Configuration for Jenkins remoting security. When enabled, it helps secure Jenkins' agent-to-master operations.
   remotingSecurity:
