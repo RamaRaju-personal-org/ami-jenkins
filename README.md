@@ -146,7 +146,7 @@ sudo apt update --quiet
 java -version
 ```
 
-### 💁‍♂️ Jenkins Installation
+###  Jenkins Installation
 
 ```bash
 # Installing Jenkins
