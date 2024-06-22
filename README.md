@@ -1,8 +1,8 @@
-# Configure your domain by creating a AWS Route53 Public Hosted Zone
+## Configure your domain by creating a AWS Route53 Public Hosted Zone
 [AWS Route53 Subdomain Delegation
 ](https://youtu.be/COaARRYXdts?si=QnjTT_2JZwfw9aDA)
 
-# Jenkins AMI w/ Hashicorp Packer [![Packer build](https://github.com/RamaRaju-personal-org/ami-jenkins/blob/main/.github/workflows/jenkins-ami.yml/badge.svg?branch=main)](https://github.com/RamaRaju-personal-org/ami-jenkins/blob/main/.github/workflows/jenkins-ami.yml)
+## Jenkins AMI w/ Hashicorp Packer [![Packer build](https://github.com/RamaRaju-personal-org/ami-jenkins/blob/main/.github/workflows/jenkins-ami.yml/badge.svg?branch=main)](https://github.com/RamaRaju-personal-org/ami-jenkins/blob/main/.github/workflows/jenkins-ami.yml)
 
 
 
