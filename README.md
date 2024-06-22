@@ -301,7 +301,7 @@ unclassified:
 
 ```
 
-### 🧳 Seed jobs using Groovy scripts.
+### 🧳 Seed jobs using Groovy scripts
 
 To setup multi-branch pipelines, we'll use `Groovy` scripts:
 
