@@ -34,5 +34,8 @@ jobs:
       # %B outputs the raw commit message of the most recent commit message
       - name: Run Commitlint on the latest commit message
         run: |
-          set -e
-          git log -1 --pretty=%B | npx commitlint || exit 1
+          git log -1 --pretty=%B | npx commitlint 
+          if [ $? -ne 0 ]; then
+            echo "Commit message does not follow conventional commit guidelines."
+            exit 1
+          fi
