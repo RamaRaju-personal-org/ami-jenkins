@@ -2,7 +2,7 @@
 [AWS Route53 Subdomain Delegation
 ](https://youtu.be/COaARRYXdts?si=QnjTT_2JZwfw9aDA)
 
-## Jenkins AMI w/ Hashicorp Packer 
+## Jenkins AMI with Hashicorp Packer 
 
 ## :package: [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli?in=packer/aws-get-started)
 
