@@ -35,4 +35,4 @@ jobs:
       - name: Run Commitlint on the latest commit message
         run: |
           set -e
-          git log -1 --pretty=%B | npx commitlint
+          git log -1 --pretty=%B | npx commitlint || exit 1
