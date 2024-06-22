@@ -62,7 +62,7 @@ The custom AMI should have the following features:
 - **Device Name:** `/dev/sda1/`
 - **Volume Size:** `8GiB`
 - **Volume Type:** `gp2`
-- Have valid `provisioners`.
+- Have valid `provisioners`
 - Pre-installed dependencies using a shell script.
 - Jenkins pre-installed on the AMI.
 
