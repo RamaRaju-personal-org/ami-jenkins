@@ -31,10 +31,8 @@ jobs:
         run: |
             echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 
-      - name: Verify Node.js installation
-        run: node -v
-
-      - name: Run Commitlint on the latest commit
+      # %B outputs the raw commit message of the most recent commit
+      - name: Run Commitlint on the latest commit message
         run: |
-          LATEST_COMMIT=$(git log -1 --pretty=format:%H)
-          npx commitlint --edit $LATEST_COMMIT
+          LATEST_COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "$LATEST_COMMIT_MSG" | npx commitlint
