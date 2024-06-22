@@ -1,9 +1,4 @@
-# [2.1.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v2.0.0...v2.1.0) (2024-06-22)
 
-
-### Features
-
-* cadddy setup for production ([b3f3f24](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/b3f3f2469671188102b7694e2902a73bc0084d76))
 
 # Changelog
 
