@@ -1,5 +1,5 @@
 name: Lint Commit Messages
-on: 
+on:
   pull_request:
     branches:
       - main
@@ -13,4 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: wagoid/commitlint-github-action@v6
+      - name: Get latest commit
+        id: get_commit
+        run: echo "::set-output name=commit::$(git rev-parse HEAD)"
+      - name: Lint latest commit message
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          commit: ${{ steps.get_commit.outputs.commit }}
