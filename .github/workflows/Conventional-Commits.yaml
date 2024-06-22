@@ -1,36 +1,22 @@
-name: Enforce Conventional Commits
-
+name: Lint Commit Messages
 on:
   pull_request:
     branches:
-      - b
-    types:
-      - opened
-      - synchronize
-      - edited
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
   commitlint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Get latest commit
+        id: get_commit
+        run: echo "::set-output name=commit::$(git rev-parse HEAD)"
+      - name: Lint latest commit message
+        uses: wagoid/commitlint-github-action@v6
         with:
-          fetch-depth: 1  # Fetch only the last one commits
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Commitlint
-        run: npm install @commitlint/config-conventional @commitlint/cli
-
-      # %B outputs the raw commit message of the most recent commit message
-      - name: Run Commitlint on the latest commit message
-        run: |
-          git log -1 --pretty=%B | npx commitlint 
-        continue-on-error: false
-
-        
+          commit: ${{ steps.get_commit.outputs.commit }}
