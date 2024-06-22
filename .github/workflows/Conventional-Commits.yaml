@@ -3,7 +3,7 @@ name: Enforce Conventional Commits
 on:
   pull_request:
     branches:
-      - b
+      - main
     types:
       - opened
       - synchronize
