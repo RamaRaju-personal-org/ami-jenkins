@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.1.0...v4.2.0) (2024-06-22)
+
+
+### Features
+
+* semantic release test 1 ([f0eafa1](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/f0eafa1f8c07d02d0d7f216efd9ad5bfbee076f9))
+
 # [4.1.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.0.0...v4.1.0) (2024-06-22)
 
 
