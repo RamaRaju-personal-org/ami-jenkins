@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.0.0...v4.1.0) (2024-06-22)
+
+
+### Features
+
+* inline ([7dd59bd](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/7dd59bd75c2d27645820141cff24b2dd900f0353))
+
 # [4.0.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v3.0.0...v4.0.0) (2024-06-22)
 
 
