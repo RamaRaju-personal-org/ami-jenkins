@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1  # Fetch only the last one commits
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -33,4 +35,6 @@ jobs:
         run: node -v
 
       - name: Run Commitlint on the latest commit
-        run: git log -1 --pretty=format:%H | xargs -I {} npx commitlint --edit {}
+        run: |
+          LATEST_COMMIT=$(git log -1 --pretty=format:%H)
+          npx commitlint --edit $LATEST_COMMIT
