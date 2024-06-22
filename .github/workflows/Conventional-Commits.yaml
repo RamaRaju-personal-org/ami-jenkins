@@ -31,7 +31,7 @@ jobs:
         run: |
             echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 
-      # %B outputs the raw commit message of the most recent commit
+      # %B outputs the raw commit message of the most recent commit message
       - name: Run Commitlint on the latest commit message
         run: |
           LATEST_COMMIT_MSG=$(git log -1 --pretty=%B)
