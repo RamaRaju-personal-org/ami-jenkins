@@ -34,5 +34,6 @@ jobs:
       # %B outputs the raw commit message of the most recent commit message
       - name: Run Commitlint on the latest commit message
         run: |
+          set -e
           LATEST_COMMIT_MSG=$(git log -1 --pretty=%B)
           echo "$LATEST_COMMIT_MSG" | npx commitlint
