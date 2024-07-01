@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.8.0...v4.9.0) (2024-07-01)
+
+
+### Features
+
+* config file name update in script ([722cf5e](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/722cf5e18d7bf2d2cf25b2477895c90521c4b230))
+
 # [4.8.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.7.0...v4.8.0) (2024-07-01)
 
 
