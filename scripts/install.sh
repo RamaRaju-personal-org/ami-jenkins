@@ -156,14 +156,12 @@ echo "Helm $(helm version)"
 
 
 
-############################## INSTALL KUBECTL  ############################
+############################## INSTALL KUBECTL & IAM AUTHENTICATOR ############################
 sudo apt-get update
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key |
-  sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' |
-  sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update && sudo apt-get install kubectl -y
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
+curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
+chmod +x ./aws-iam-authenticator
+mv ./aws-iam-authenticator /usr/local/bin
 
 # Check Kubectl version
 echo "Kubectl $(kubectl version --client)"
@@ -177,6 +175,9 @@ sudo mkdir k8s_files
 
 # on your machine copy the config.yml file to the jenkins container 
 sudo cp /home/ubuntu/config.yaml /var/lib/jenkins/.kube/
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/*
+
+
 
 # check the file on the jenkins container 
 ls -al .kube
