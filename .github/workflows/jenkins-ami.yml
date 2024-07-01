@@ -49,4 +49,6 @@ jobs:
         shell: bash
 
       - name: Build AMI
-        run: packer build .
+        run: |
+           ls -al
+           packer build .
