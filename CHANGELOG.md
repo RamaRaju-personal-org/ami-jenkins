@@ -1,3 +1,10 @@
+# [4.8.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.7.0...v4.8.0) (2024-07-01)
+
+
+### Features
+
+* packer file addition ([7a90f29](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/7a90f299818f26b1fc60eec504c7a391f434fad6))
+
 # [4.7.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.6.0...v4.7.0) (2024-07-01)
 
 
