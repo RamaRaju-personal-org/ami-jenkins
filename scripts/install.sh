@@ -171,13 +171,13 @@ echo "Kubectl $(kubectl version --client)"
 echo "$pwd"
 
 # copy the config file to the jenkins container 
-cd /var/lib/jenkins/jenkins_home # on jenkins container
-mkdir .kube # create a .kube folder
-mkdir k8s_files
+cd /var/lib/jenkins # on jenkins container
+sudo mkdir .kube # create a .kube folder
+sudo mkdir k8s_files
 
 
 # on your machine copy the config.yml file to the jenkins container 
-cp /home/ubuntu/K8s_config/config.yml /var/lib/jenkins/jenkins_home/.kube/
+cp /home/ubuntu/config.yml /var/lib/jenkins/.kube/
 
 # check the file on the jenkins container 
 ls -al .kube
