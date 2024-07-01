@@ -140,3 +140,57 @@ sudo mkdir -p /etc/systemd/system/jenkins.service.d/
 sudo systemctl daemon-reload
 sudo systemctl stop jenkins
 sudo systemctl start jenkins
+
+
+############################## Helm Installation ############################
+
+sudo apt-get update
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg >/dev/null
+sudo apt-get install apt-transport-https -y
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" |
+  sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update && sudo apt-get install helm
+
+# Check Helm version
+echo "Helm $(helm version)"
+
+
+
+############################## INSTALL KUBECTL  ############################
+sudo apt-get update
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key |
+  sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' |
+  sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update && sudo apt-get install kubectl -y
+
+# Check Kubectl version
+echo "Kubectl $(kubectl version --client)"
+
+# copy the config file to the jenkins container 
+cd /var/jenkins_home # on jenkins container
+mkdir .kube # create a .kube folder
+
+# on your machine copy the config.yml file to the jenkins container 
+docker cp config.yml "YOUR DOCKER CONTAINER ID":/var/jenkins_home/.kube/
+
+# check the file on the jenkins container 
+ls -al .kube
+
+# copy the config file to the jenkins_home 
+cd /var/jenkins_home # on jenkins container
+mkdir .kube # create a .kube folder
+mkdir k8s_files
+
+# on your machine copy the config.yml file to the jenkins container 
+cp ./K8s_config/config.yml /var/jenkins_home/.kube/
+
+# check the file on the jenkins container 
+ls -al .kube
+
+
+
+##################### INSTALL ENVSUBST ##################
+# envsubst installation (login as root and install)
+sudo apt-get install gettext-base  -y
