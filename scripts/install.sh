@@ -168,23 +168,16 @@ sudo apt-get update && sudo apt-get install kubectl -y
 # Check Kubectl version
 echo "Kubectl $(kubectl version --client)"
 
+echo "$pwd"
+
 # copy the config file to the jenkins container 
-cd /var/jenkins_home # on jenkins container
-mkdir .kube # create a .kube folder
-
-# on your machine copy the config.yml file to the jenkins container 
-docker cp config.yml "YOUR DOCKER CONTAINER ID":/var/jenkins_home/.kube/
-
-# check the file on the jenkins container 
-ls -al .kube
-
-# copy the config file to the jenkins_home 
-cd /var/jenkins_home # on jenkins container
+cd /var/lib/jenkins/jenkins_home # on jenkins container
 mkdir .kube # create a .kube folder
 mkdir k8s_files
 
+
 # on your machine copy the config.yml file to the jenkins container 
-cp ./K8s_config/config.yml /var/jenkins_home/.kube/
+cp /home/ubuntu/K8s_config/config.yml /var/lib/jenkins/jenkins_home/.kube/
 
 # check the file on the jenkins container 
 ls -al .kube
