@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.4.0...v4.5.0) (2024-07-01)
+
+
+### Features
+
+* modify install script ([20f4b09](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/20f4b095eb8db2cb4a4fd5736f11050754a5e02d))
+
 # [4.4.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.3.0...v4.4.0) (2024-07-01)
 
 
