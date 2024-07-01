@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.5.0...v4.6.0) (2024-07-01)
+
+
+### Features
+
+* directory path fix ([68cda19](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/68cda190afa8fa1932ce79babb2dcfc4a1c09932))
+
 # [4.5.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.4.0...v4.5.0) (2024-07-01)
 
 
