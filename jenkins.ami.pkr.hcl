@@ -65,6 +65,11 @@ build {
     destination = "/home/ubuntu/Jenkinsfile"
   }
 
+  provisioner "file" {
+    source      = "./K8s_config/config.yaml"
+    destination = "/home/ubuntu/config.yaml"
+  }
+
   provisioner "shell" {
     scripts = [
       "./scripts/install.sh",
