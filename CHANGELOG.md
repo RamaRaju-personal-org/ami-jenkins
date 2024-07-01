@@ -1,3 +1,11 @@
+# [4.11.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.10.0...v4.11.0) (2024-07-01)
+
+
+### Features
+
+* iAM Auth ([c46346c](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/c46346c82a4c33eee7d526625325f2d1de1e903a))
+* iAM Auth ([660b78c](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/660b78c80a1522f1e01c48b339dba694f07b88a0))
+
 # [4.10.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.9.0...v4.10.0) (2024-07-01)
 
 
