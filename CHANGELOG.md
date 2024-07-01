@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.9.0...v4.10.0) (2024-07-01)
+
+
+### Features
+
+* permmision fix ([f1db4a7](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/f1db4a7e41d908b5c6e8c59b4b58e0d7f71b7acb))
+
 # [4.9.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.8.0...v4.9.0) (2024-07-01)
 
 
