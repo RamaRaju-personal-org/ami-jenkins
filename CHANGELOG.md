@@ -1,3 +1,10 @@
+## [4.12.1](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.0...v4.12.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* installation fix ([b14c342](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/b14c342cb37de42f48b1a2d7569d8d4de6f9c319))
+
 # [4.12.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.11.0...v4.12.0) (2024-07-01)
 
 
