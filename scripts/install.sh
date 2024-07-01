@@ -176,7 +176,7 @@ sudo mkdir k8s_files
 
 
 # on your machine copy the config.yml file to the jenkins container 
-cp /home/ubuntu/config.yml /var/lib/jenkins/.kube/
+cp /home/ubuntu/config.yaml /var/lib/jenkins/.kube/
 
 # check the file on the jenkins container 
 ls -al .kube
