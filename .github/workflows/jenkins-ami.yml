@@ -7,7 +7,7 @@ on:
 
 jobs:
   buildAmi:
-    if: github.repository == 'RamaRaju-personal-org/ami-jenkins' && github.ref == 'refs/heads/master'
+    if: github.repository == 'RamaRaju-personal-org/ami-jenkins' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
