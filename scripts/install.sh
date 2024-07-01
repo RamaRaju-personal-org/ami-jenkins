@@ -157,33 +157,23 @@ echo "Helm $(helm version)"
 
 
 ############################## INSTALL KUBECTL & IAM AUTHENTICATOR ############################
+# Install kubectl and AWS IAM Authenticator
 sudo apt-get update
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
-curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
-chmod +x ./aws-iam-authenticator
-mv ./aws-iam-authenticator /usr/local/bin
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 
-# Check Kubectl version.
+curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
+sudo chmod +x ./aws-iam-authenticator
+sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+
 echo "Kubectl $(kubectl version --client)"
+echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
 
-
-# copy the config file to the jenkins container 
-cd /var/lib/jenkins # on jenkins container
-sudo mkdir .kube # create a .kube folder
-sudo mkdir k8s_files
-
-
-# on your machine copy the config.yml file to the jenkins container 
+# Copy Kubernetes config to Jenkins container
+sudo mkdir -p /var/lib/jenkins/.kube
 sudo cp /home/ubuntu/config.yaml /var/lib/jenkins/.kube/
-sudo chown jenkins:jenkins /var/lib/jenkins/.kube/*
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube/
 
-
-
-# check the file on the jenkins container 
-ls -al .kube
-
-
-
-##################### INSTALL ENVSUBST ##################
-# envsubst installation (login as root and install)
-sudo apt-get install gettext-base  -y
+# Install envsubst
+sudo apt-get install -y gettext-base
