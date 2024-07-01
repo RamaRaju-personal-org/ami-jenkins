@@ -163,7 +163,7 @@ curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authen
 chmod +x ./aws-iam-authenticator
 mv ./aws-iam-authenticator /usr/local/bin
 
-# Check Kubectl version
+# Check Kubectl version.
 echo "Kubectl $(kubectl version --client)"
 
 
