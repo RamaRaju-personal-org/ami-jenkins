@@ -50,5 +50,6 @@ jobs:
 
       - name: Build AMI
         run: |
+           pwd
            ls -al
            packer build .
