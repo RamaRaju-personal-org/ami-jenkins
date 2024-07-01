@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.11.0...v4.12.0) (2024-07-01)
+
+
+### Features
+
+* install script ([4611edf](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/4611edfbea4e042ca36e4fcd0d8d2a9d7e0391a8))
+
 # [4.11.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.10.0...v4.11.0) (2024-07-01)
 
 
