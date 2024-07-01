@@ -1,3 +1,11 @@
+# [4.7.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.6.0...v4.7.0) (2024-07-01)
+
+
+### Features
+
+* kube listing ([1aee06e](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/1aee06eaed0de590b1cad3f437f393b10e1ad2d7))
+* path check ([35d0610](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/35d0610cbb940145392cc5fed28768170494ddab))
+
 # [4.6.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.5.0...v4.6.0) (2024-07-01)
 
 
