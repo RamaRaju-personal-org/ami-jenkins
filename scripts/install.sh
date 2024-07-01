@@ -86,7 +86,7 @@ sudo rm /etc/caddy/Caddyfile
 # Create new Caddyfile for Jenkins
 sudo tee /etc/caddy/Caddyfile <<EOF
 {
-   # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+   acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
 
 cicd.ramaraju.cloud {
@@ -168,7 +168,6 @@ sudo apt-get update && sudo apt-get install kubectl -y
 # Check Kubectl version
 echo "Kubectl $(kubectl version --client)"
 
-echo "$pwd"
 
 # copy the config file to the jenkins container 
 cd /var/lib/jenkins # on jenkins container
