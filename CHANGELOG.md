@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.3.0...v4.4.0) (2024-07-01)
+
+
+### Features
+
+* helm,Kubectl and envsubst install ([c81f986](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/c81f986fd95c5e78858dbd19e507094c481a8d2a))
+
 # [4.3.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.2.0...v4.3.0) (2024-07-01)
 
 
