@@ -33,15 +33,28 @@ credentials:
               scope: GLOBAL
               id: "docker-hub-credentials-id"
               description: "Docker Hub Credentials"
-              username: "docker_hub_username"  # Replace with your Docker Hub username or use Jenkins secrets
-              password: "docker_hub_password"  # Replace with your Docker Hub password or use Jenkins secrets
+              username: "docker_hub_username"  
+              password: "docker_hub_password"  
       - credentials:
           - usernamePassword:
               scope: GLOBAL
               id: "git-personal-access-token"
               description: "git hub credentials"
-              username: "git_username"  # Replace with your Docker Hub username or use Jenkins secrets
-              password: "GITHUB_TOKEN"  # Replace with your Docker Hub password or use Jenkins secrets
+              username: "git_username"  
+              password: "GITHUB_TOKEN"  
+      - credentials:
+          - string:
+              scope: GLOBAL
+              id: "jenkins_aws_access_key_id"
+              description: "AWS Access Key ID"
+              secret: ${AWS_ACCESS_KEY_ID}  # Use an environment variable or secret manager to inject this
+      - credentials:
+          - string:
+              scope: GLOBAL
+              id: "jenkins_aws_secret_access_key"
+              description: "AWS Secret Access Key"
+              secret: "${AWS_SECRET_ACCESS_KEY}"  # Use an environment variable to inject this
+
 
 jobs:
   - file: ./build-docker-image.groovy

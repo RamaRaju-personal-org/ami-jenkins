@@ -3,12 +3,16 @@ name: Build Jenkins AMI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   buildAmi:
     if: github.repository == 'RamaRaju-personal-org/ami-jenkins' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
       - name: Checkout code
@@ -40,11 +44,9 @@ jobs:
           sed -i "s|jenkins_ami_git_url|${{ secrets.GIT_JENKINS_AMI_REPO_URL }}|g" jenkins/build-docker-image.groovy
           sed -i "s|git_username|${{ secrets.git_username }}|g" jenkins/jenkins.yaml
           sed -i "s|GITHUB_TOKEN|${{ secrets.GIT_TOKEN }}|g" jenkins/jenkins.yaml
+          sed -i "s|your_certificate_authority_data|${{ secrets.YOUR_CERTIFICATE_AUTHORITY_DATA }}|g" K8s_config/config.yaml
+          sed -i "s|aws_api_server|${{ secrets.AWS_API_SERVER }}|g" K8s_config/config.yaml
         shell: bash
 
       - name: Build AMI
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: packer build .
