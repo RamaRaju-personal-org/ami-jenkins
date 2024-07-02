@@ -76,6 +76,8 @@ sudo /usr/local/bin/unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
 echo "AWS CLI installed."
 
+
+############################################################################
 # Caddy(stable) installation docs: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
 
 # Install and configure keyring for caddy stable release:
