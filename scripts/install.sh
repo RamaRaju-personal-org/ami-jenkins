@@ -62,53 +62,6 @@ sudo usermod -aG docker jenkins
 
 ##########################################################################
 
-# Install unzip
-sudo apt install unzip -y 
-
-# Install AWS CLI.
-sudo apt-get update
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-sudo aws --version
-
-# Configure AWS CLI with environment variables
-AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
-AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
-AWS_REGION="eu-central-1"
-
-# Clear any existing AWS configuration
-rm -rf ~/.aws
-mkdir -p ~/.aws
-
-# Create AWS credentials file
-cat <<EOL > ~/.aws/credentials
-[default]
-aws_access_key_id = ${AWS_ACCESS_KEY_ID}
-aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}
-EOL
-
-# Create AWS config file
-cat <<EOL > ~/.aws/config
-[default]
-region = ${AWS_REGION}
-EOL
-
-# Verify AWS CLI configuration
-echo "Verifying AWS CLI configuration..."
-cat ~/.aws/credentials
-cat ~/.aws/config
-
-# Verify AWS CLI can authenticate
-echo "Verifying AWS CLI authentication..."
-aws sts get-caller-identity
-
-if [ $? -eq 0 ]; then
-    echo "AWS CLI is configured correctly and can authenticate."
-else
-    echo "Failed to authenticate with AWS CLI."
-    exit 1
-fi
 
 
 
@@ -203,24 +156,79 @@ sudo apt-get update && sudo apt-get install -y helm
 echo "Helm $(helm version)"
 
 ############################## INSTALL KUBECTL & IAM AUTHENTICATOR ############################
-# # Install kubectl and AWS IAM Authenticator
-# sudo apt-get update
 
-# sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-# sudo chmod +x ./kubectl
-# sudo mv ./kubectl /usr/local/bin
+# Install unzip
+sudo apt install unzip -y 
 
-# sudo curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
-# sudo chmod +x ./aws-iam-authenticator
-# sudo mv ./aws-iam-authenticator /usr/local/bin
+# Install AWS CLI.
+sudo apt-get update
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+sudo aws --version
 
-# echo "Kubectl $(kubectl version --client)"
-# echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
 
-# # Copy Kubernetes config to Jenkins container
-# sudo mkdir -p /var/lib/jenkins/.kube
-# sudo cp /home/ubuntu/config.yaml /var/lib/jenkins/.kube/
-# sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube/
+# Clear any existing AWS configuration
+rm -rf ~/.aws
+mkdir -p ~/.aws
 
+# Create AWS credentials file
+cat <<EOL > ~/.aws/credentials
+[default]
+aws_access_key_id = ${AWS_ACCESS_KEY_ID}
+aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}
+EOL
+
+# Create AWS config file
+cat <<EOL > ~/.aws/config
+[default]
+region = us-east-1
+EOL
+
+# Verify AWS CLI configuration
+echo "Verifying AWS CLI configuration..."
+cat ~/.aws/credentials
+cat ~/.aws/config
+
+# Verify AWS CLI can authenticate
+echo "Verifying AWS CLI authentication..."
+aws sts get-caller-identity
+
+if [ $? -eq 0 ]; then
+    echo "AWS CLI is configured correctly and can authenticate."
+else
+    echo "Failed to authenticate with AWS CLI."
+    exit 1
+fi
+
+
+
+# Install kubectl and AWS IAM Authenticator
+sudo apt-get update
+
+sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+
+sudo curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
+sudo chmod +x ./aws-iam-authenticator
+sudo mv ./aws-iam-authenticator /usr/local/bin
+
+echo "Kubectl $(kubectl version --client)"
+echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
+
+
+
+# Update kubeconfig for EKS cluster
+sudo mkdir -p /var/lib/jenkins/.kube
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube/
+aws eks update-kubeconfig --name ram-eks-cluster --region us-east-1 --kubeconfig /var/lib/jenkins/.kube/config
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
+
+
+export KUBECONFIG=/var/lib/jenkins/.kube/config
+kubectl version
+kubectl get nodes
+          
 # Install envsubst
 sudo apt-get install -y gettext-base
