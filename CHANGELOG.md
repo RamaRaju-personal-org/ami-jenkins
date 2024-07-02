@@ -1,3 +1,10 @@
+# [4.17.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.16.0...v4.17.0) (2024-07-02)
+
+
+### Features
+
+* bash script ([db49ce6](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/db49ce6a0a11e02722948e41952529eaaf974314))
+
 # [4.16.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.15.0...v4.16.0) (2024-07-02)
 
 
