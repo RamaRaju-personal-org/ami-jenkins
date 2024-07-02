@@ -196,7 +196,7 @@ sudo aws eks update-kubeconfig --name ram-eks-cluster --region us-east-1 --kubec
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
 
 
-export KUBECONFIG=/var/lib/jenkins/.kube/config
+sudo sh -c 'export KUBECONFIG=/var/lib/jenkins/.kube/config'
 sudo kubectl version
 sudo kubectl get nodes
           
