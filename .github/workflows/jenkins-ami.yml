@@ -42,15 +42,20 @@ jobs:
         run: |
           sed -i "s|ADMIN_USER|${{ secrets.JENKINS_ADMIN_USER }}|g" jenkins/jenkins.yaml
           sed -i "s|ADMIN_PASSWORD|${{ secrets.JENKINS_ADMIN_PASSWORD }}|g" jenkins/jenkins.yaml
+
           sed -i "s|docker_hub_username|${{ secrets.docker_hub_username }}|g" jenkins/jenkins.yaml
           sed -i "s|docker_hub_password|${{ secrets.docker_hub_password }}|g" jenkins/jenkins.yaml
+
           sed -i "s|jenkins_ami_git_url|${{ secrets.GIT_JENKINS_AMI_REPO_URL }}|g" jenkins/build-docker-image.groovy
           sed -i "s|git_username|${{ secrets.git_username }}|g" jenkins/jenkins.yaml
           sed -i "s|GITHUB_TOKEN|${{ secrets.GIT_TOKEN }}|g" jenkins/jenkins.yaml
+
           sed -i "s|\${AWS_ACCESS_KEY_ID}|${{ secrets.AWS_ACCESS_KEY_ID }}|g" jenkins/jenkins.yaml
           sed -i "s|\${AWS_SECRET_ACCESS_KEY}|${{ secrets.AWS_SECRET_ACCESS_KEY }}|g" jenkins/jenkins.yaml
-          sed -i "s|\${AWS_ACCESS_KEY_ID}|${{ secrets.AWS_ACCESS_KEY_ID }}|g" scripts/install.sh
-          sed -i "s|\${AWS_SECRET_ACCESS_KEY}|${{ secrets.AWS_SECRET_ACCESS_KEY }}|g" scripts/install.sh
+
+          sed -i "s|\$AWS_ACCESS_KEY_ID|${{ secrets.AWS_ACCESS_KEY_ID }}|g" scripts/install.sh
+          sed -i "s|\$AWS_SECRET_ACCESS_KEY|${{ secrets.AWS_SECRET_ACCESS_KEY }}|g" scripts/install.sh
+          sed -i "s|\$AWS_REGION|${{ secrets.AWS_REGION }}|g" scripts/install.sh
         shell: bash
 
       - name: Build AMI

@@ -167,40 +167,10 @@ unzip awscliv2.zip
 sudo ./aws/install
 sudo aws --version
 
-
-# Clear any existing AWS configuration
-sudo rm -rf ~/.aws
-sudo mkdir -p ~/.aws
-
-# Create AWS credentials file
-cat <<EOL > ~/.aws/credentials
-[default]
-aws_access_key_id = ${AWS_ACCESS_KEY_ID}
-aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}
-EOL
-
-# Create AWS config file
-cat <<EOL > ~/.aws/config
-[default]
-region = us-east-1
-EOL
-
-# Verify AWS CLI configuration
-echo "Verifying AWS CLI configuration..."
-cat ~/.aws/credentials
-cat ~/.aws/config
-
-# Verify AWS CLI can authenticate
-echo "Verifying AWS CLI authentication..."
-aws sts get-caller-identity
-
-if [ $? -eq 0 ]; then
-    echo "AWS CLI is configured correctly and can authenticate."
-else
-    echo "Failed to authenticate with AWS CLI."
-    exit 1
-fi
-
+# Configure AWS CLI
+aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws configure set default.region "$AWS_REGION"
 
 
 # Install kubectl and AWS IAM Authenticator
