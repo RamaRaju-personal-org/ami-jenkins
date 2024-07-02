@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.7...v4.13.0) (2024-07-02)
+
+
+### Features
+
+* script upgrade ([d2887c4](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/d2887c40e205fe9ede8fa15e4aea679b1e12ecb6))
+
 ## [4.12.7](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.6...v4.12.7) (2024-07-02)
 
 
