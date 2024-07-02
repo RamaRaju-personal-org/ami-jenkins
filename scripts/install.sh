@@ -170,11 +170,11 @@ sudo apt-get update
 
 sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo chmod +x ./kubectl
-mv ./kubectl /usr/local/bin
+sudo mv ./kubectl /usr/local/bin
 
 sudo curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
 sudo chmod +x ./aws-iam-authenticator
-mv ./aws-iam-authenticator /usr/local/bin
+sudo mv ./aws-iam-authenticator /usr/local/bin
 
 echo "Kubectl $(kubectl version --client)"
 echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
