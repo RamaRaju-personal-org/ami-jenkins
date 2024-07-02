@@ -42,7 +42,7 @@ echo "Jenkins $(jenkins --version)"
 #########################################################################
 
 # install docker 
-sudo apt-get install ca-certificates curl gnupg
+sudo apt-get install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -54,7 +54,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # Install Docker:
-sudo apt-get update && sudo apt-get install docker-ce -y
+sudo apt-get update && sudo apt-get install -y docker-ce
 
 #If you want to avoid typing sudo whenever you run the docker command, add your username to the docker group:
 sudo chmod 666 /var/run/docker.sock
@@ -62,6 +62,19 @@ sudo usermod -aG docker jenkins
 
 ##########################################################################
 
+# Install busybox for unzip
+sudo curl -L "https://busybox.net/downloads/binaries/1.35.0-x86_64/busybox" -o "/usr/local/bin/busybox"
+sudo chmod +x "/usr/local/bin/busybox"
+if [ ! -f "/usr/local/bin/unzip" ]; then
+    sudo ln -s "/usr/local/bin/busybox" "/usr/local/bin/unzip"
+fi
+echo "busybox installed."
+
+# Install AWS CLI
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo /usr/local/bin/unzip awscliv2.zip
+sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+echo "AWS CLI installed."
 
 # Caddy(stable) installation docs: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
 
@@ -73,12 +86,10 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo 
   /etc/apt/sources.list.d/caddy-stable.list
 
 # Install caddy:
-sudo apt-get update && sudo apt-get install caddy -y
-
+sudo apt-get update && sudo apt-get install -y caddy
 
 # Enable Caddy service
 sudo systemctl enable caddy
-
 
 # Remove default Caddyfile
 sudo rm /etc/caddy/Caddyfile
@@ -141,32 +152,29 @@ sudo systemctl daemon-reload
 sudo systemctl stop jenkins
 sudo systemctl start jenkins
 
-
 ############################## Helm Installation ############################
 
 sudo apt-get update
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg >/dev/null
-sudo apt-get install apt-transport-https -y
+sudo apt-get install -y apt-transport-https
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" |
   sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update && sudo apt-get install helm
+sudo apt-get update && sudo apt-get install -y helm
 
 # Check Helm version
 echo "Helm $(helm version)"
 
-
-
 ############################## INSTALL KUBECTL & IAM AUTHENTICATOR ############################
 # Install kubectl and AWS IAM Authenticator
 sudo apt-get update
-cd /usr/local/bin/ || exit 
 
-curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo chmod +x ./kubectl
+mv ./kubectl /usr/local/bin
 
-
-curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
+sudo curl -Lo aws-iam-authenticator "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64"
 sudo chmod +x ./aws-iam-authenticator
+mv ./aws-iam-authenticator /usr/local/bin
 
 echo "Kubectl $(kubectl version --client)"
 echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
