@@ -1,3 +1,10 @@
+# [4.18.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.17.0...v4.18.0) (2024-07-02)
+
+
+### Features
+
+* bash script addon ([6f1db64](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/6f1db645e47f90bf53a3b81bf969cdfd54d1b9f1))
+
 # [4.17.0](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.16.0...v4.17.0) (2024-07-02)
 
 
