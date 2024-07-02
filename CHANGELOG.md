@@ -1,3 +1,10 @@
+## [4.12.5](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.4...v4.12.5) (2024-07-02)
+
+
+### Bug Fixes
+
+* install script exec 1 ([5370587](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/537058712dc947057e966d745deef4bc0238f066))
+
 ## [4.12.4](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.3...v4.12.4) (2024-07-02)
 
 
