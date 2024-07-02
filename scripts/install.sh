@@ -71,7 +71,7 @@ fi
 echo "busybox installed."
 
 # Install AWS CLI.
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/usr/local/bin/awscliv2.zip"
 sudo /usr/local/bin/unzip awscliv2.zip
 sudo ./aws/install
 echo "AWS CLI installed."
