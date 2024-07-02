@@ -1,3 +1,10 @@
+## [4.12.2](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.1...v4.12.2) (2024-07-02)
+
+
+### Bug Fixes
+
+* script fix ([735e75c](https://github.com/RamaRaju-personal-org/ami-jenkins/commit/735e75c717015405eaad5cafb97a08d3eda7763f))
+
 ## [4.12.1](https://github.com/RamaRaju-personal-org/ami-jenkins/compare/v4.12.0...v4.12.1) (2024-07-01)
 
 
