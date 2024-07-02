@@ -62,19 +62,15 @@ sudo usermod -aG docker jenkins
 
 ##########################################################################
 
-# Install busybox for unzip
-sudo curl -L "https://busybox.net/downloads/binaries/1.35.0-x86_64/busybox" -o "/usr/local/bin/busybox"
-sudo chmod +x "/usr/local/bin/busybox"
-if [ ! -f "/usr/local/bin/unzip" ]; then
-    sudo ln -s "/usr/local/bin/busybox" "/usr/local/bin/unzip"
-fi
-echo "busybox installed."
+# Install unzip
+sudo apt install unzip -y 
 
 # Install AWS CLI.
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/usr/local/bin/awscliv2.zip"
-sudo /usr/local/bin/unzip awscliv2.zip
+sudo apt-get update
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
 sudo ./aws/install
-echo "AWS CLI installed."
+sudo aws --version
 
 
 ############################################################################
