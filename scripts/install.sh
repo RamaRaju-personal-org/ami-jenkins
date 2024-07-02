@@ -163,14 +163,14 @@ sudo apt install unzip -y
 # Install AWS CLI.
 sudo apt-get update
 sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+sudo unzip awscliv2.zip
 sudo ./aws/install
 sudo aws --version
 
 # Configure AWS CLI
-aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
-aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
-aws configure set default.region "$AWS_REGION"
+sudo aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+sudo aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+sudo aws configure set default.region "$AWS_REGION"
 
 
 # Install kubectl and AWS IAM Authenticator
@@ -192,13 +192,13 @@ echo "AWS IAM Authenticator $(aws-iam-authenticator version)"
 # Update kubeconfig for EKS cluster
 sudo mkdir -p /var/lib/jenkins/.kube
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube/
-aws eks update-kubeconfig --name ram-eks-cluster --region us-east-1 --kubeconfig /var/lib/jenkins/.kube/config
+sudo aws eks update-kubeconfig --name ram-eks-cluster --region us-east-1 --kubeconfig /var/lib/jenkins/.kube/config
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
 
 
 export KUBECONFIG=/var/lib/jenkins/.kube/config
-kubectl version
-kubectl get nodes
+sudo kubectl version
+sudo kubectl get nodes
           
 # Install envsubst
 sudo apt-get install -y gettext-base
