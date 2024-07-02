@@ -169,8 +169,8 @@ sudo aws --version
 
 
 # Clear any existing AWS configuration
-rm -rf ~/.aws
-mkdir -p ~/.aws
+sudo rm -rf ~/.aws
+sudo mkdir -p ~/.aws
 
 # Create AWS credentials file
 cat <<EOL > ~/.aws/credentials
